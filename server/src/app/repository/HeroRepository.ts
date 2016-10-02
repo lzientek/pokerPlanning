@@ -2,12 +2,11 @@
  * Created by Lzientek on 01-10-2016.
  */
 
-import HeroModel = require("./../model/HeroModel");
-import IHeroModel = require("./../model/interfaces/HeroModel");
+import IRoomModel = require("./../model/interfaces/HeroModel");
 import HeroSchema = require("./../dataAccess/schemas/HeroSchema");
 import RepositoryBase = require("./BaseRepository");
 
-class HeroRepository  extends RepositoryBase<IHeroModel> {
+class HeroRepository  extends RepositoryBase<IRoomModel> {
     constructor () {
         super(HeroSchema);
     }

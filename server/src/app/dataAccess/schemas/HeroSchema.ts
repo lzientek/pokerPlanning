@@ -30,4 +30,4 @@ class HeroSchema {
     }
 }
 var schema = mongooseConnection.model<IHeroModel>("Heroes", HeroSchema.schema);
-export = schema;""
+export = schema;
