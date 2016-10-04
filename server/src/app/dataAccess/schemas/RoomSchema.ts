@@ -3,7 +3,7 @@
  */
 
 import DataAccess = require('../DataAccess');
-import IRoomModel = require("./../../model/interfaces/HeroModel");
+import IRoomModel = require("./../../model/RoomModel");
 import Mongoose = require("mongoose");
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;

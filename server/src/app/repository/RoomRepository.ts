@@ -2,7 +2,7 @@
  * Created by Lzientek on 01-10-2016.
  */
 
-import IRoomModel = require("./../model/interfaces/RoomModel");
+import IRoomModel = require("./../model/RoomModel");
 import RoomSchema = require("./../dataAccess/schemas/RoomSchema");
 import RepositoryBase = require("./BaseRepository");
 
