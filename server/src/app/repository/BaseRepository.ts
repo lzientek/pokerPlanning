@@ -15,18 +15,17 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
         this._model = schemaModel;
     }
 
-    create (item: T, callback: (error: any, result: any) => void) {
+    create (item: T, callback: (error: any, result: T) => void) {
         this._model.create(item, callback);
 
     }
 
-    retrieve (callback: (error: any, result: any) => void) {
-        this._model.find({}, callback)
+    retrieve (callback: (error: any, result: [T]) => void) {
+        this._model.find({}, callback);
     }
 
     update (_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
         this._model.update({_id: _id}, item, callback);
-
     }
 
     delete (_id: string, callback:(error: any, result: any) => void) {
@@ -40,7 +39,7 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
 
 
     private toObjectId (_id: string) : mongoose.Types.ObjectId {
-        return mongoose.Types.ObjectId.createFromHexString(_id)
+        return mongoose.Types.ObjectId.createFromHexString(_id);
     }
 
 }

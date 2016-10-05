@@ -4,23 +4,26 @@
 
 import express = require("express");
 import RoomController = require("./../../controllers/RoomController");
+import UserController = require("./../../controllers/UserController");
 
 var router = express.Router();
 class RoomRoutes {
     private _roomController: RoomController;
+    private _userController: UserController;
 
     constructor () {
         this._roomController = new RoomController();
+        this._userController = new UserController();
     }
     get routes () {
-        var controller = this._roomController;
+        router.get("/", this._roomController.retrieve);
+        router.post("/", this._roomController.create);
+        router.put("/:_id", this._roomController.update);
+        router.get("/:_id", this._roomController.findById);
+        router.delete("/:_id", this._roomController.delete);
 
-        router.get("/", controller.retrieve);
-        router.post("/", controller.create);
-        router.put("/:_id", controller.update);
-        router.get("/:_id", controller.findById);
-        router.delete("/:_id", controller.delete);
-
+        router.post("/:_id/user", this._userController.addUser);
+        router.delete("/:_id/user/:_userId", this._userController.removeUser);
         return router;
     }
 

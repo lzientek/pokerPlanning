@@ -4,7 +4,9 @@
 
 import DataAccess = require('../DataAccess');
 import IRoomModel = require("./../../model/RoomModel");
-import Mongoose = require("mongoose");
+import UserSchema = require('./UserSchema');
+import CardSchema = require('./CardSchema');
+
 var mongoose = DataAccess.mongooseInstance;
 var mongooseConnection = DataAccess.mongooseConnection;
 
@@ -22,12 +24,10 @@ class RoomSchema {
                 required: true
             },
             users: {
-                type: [Mongoose.Schema.Types.ObjectId],
-                ref: 'User',
+                type: [UserSchema.schema],
             },
             cards: {
-                type: [Mongoose.Schema.Types.ObjectId],
-                ref: 'Card',
+                type: [CardSchema.schema],
             }
         });
 

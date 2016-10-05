@@ -12,9 +12,10 @@ class RoomController implements IBaseController <RoomBusiness> {
     create(req: express.Request, res: express.Response): void {
         try {
 
-            var hero: IRoomModel = <IRoomModel>req.body;
+            var room: IRoomModel = <IRoomModel>req.body;
+            console.log(req.body);
             var roomBusiness = new RoomBusiness();
-            roomBusiness.create(hero, (error, result) => {
+            roomBusiness.create(room, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});
                 } else {res.send(result); }
