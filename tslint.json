@@ -2,7 +2,7 @@
   "rules": {
     "class-name": true,
     "curly": true,
-    "eofline": false,
+    "eofline": true,
     "forin": true,
     "indent": [
       true,
@@ -12,7 +12,7 @@
     "label-undefined": true,
     "max-line-length": [
       true,
-      200
+      100
     ],
     "no-arg": true,
     "no-bitwise": true,
@@ -34,6 +34,13 @@
     "no-trailing-whitespace": true,
     "no-unused-variable": true,
     "no-unreachable": true,
+    "no-consecutive-blank-lines": true,
+    "no-trailing-comma": false,
+    "no-var-keyword": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
     "no-use-before-declare": true,
     "one-line": [
       true,
@@ -55,6 +62,7 @@
       "check-decl",
       "check-operator",
       "check-separator"
-    ]
+    ],
+    
   }
 }
