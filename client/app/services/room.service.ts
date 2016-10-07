@@ -6,65 +6,65 @@ import {Injectable} from '@angular/core';
 
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {Hero} from "../models/hero";
+import { Room } from "../models/Room";
 
 @Injectable()
-export class HeroService {
+export class RoomService {
 
-    private heroesUrl = 'api/heroes';  // URL to web api
+    private roomsUrl = 'api/rooms';  // URL to web api
 
     constructor(private http: Http) { }
 
-    getHeroes(): Promise<Hero[]> {
-        return this.http.get(this.heroesUrl)
+    getRooms(): Promise<Room[]> {
+        return this.http.get(this.roomsUrl)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    getHero(id: string) {
-        return this.http.get(this.heroesUrl + '/' + id)
+    getRoom(id: string) {
+        return this.http.get(this.roomsUrl + '/' + id)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    save(hero: Hero): Promise<Hero>  {
-        if (hero._id) {
-            return this.put(hero);
+    save(room: Room): Promise<Room>  {
+        if (room._id) {
+            return this.put(room);
         }
-        return this.post(hero);
+        return this.post(room);
     }
 
-    private post(hero: Hero): Promise<Hero> {
+    private post(room: Room): Promise<Room> {
         let headers = new Headers({
             'Content-Type': 'application/json'});
 
         return this.http
-            .post(this.heroesUrl, JSON.stringify(hero), {headers:headers})
+            .post(this.roomsUrl, JSON.stringify(room), {headers:headers})
             .toPromise()
             .then(response => response.json().data)
             .catch(this.handleError);
     }
 
-    private put(hero: Hero) {
+    private put(room: Room) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.heroesUrl}/${hero._id}`;
+        let url = `${this.roomsUrl}/${room._id}`;
 
         return this.http
-            .put(url, JSON.stringify(hero), {headers: headers})
+            .put(url, JSON.stringify(room), {headers: headers})
             .toPromise()
-            .then(() => hero)
+            .then(() => room)
             .catch(this.handleError);
     }
 
-    delete(hero: Hero) {
+    delete(room: Room) {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.heroesUrl}/${hero._id}`;
+        let url = `${this.roomsUrl}/${room._id}`;
 
         return this.http
             .delete(url, headers)

@@ -5,8 +5,8 @@
 import {Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
-import {Hero} from "../../models/hero";
-import {HeroService} from "../../services/hero.service";
+import { Room } from "../../models/Room";
+import { RoomService } from "../../services/room.service";
 
 @Component({
     selector: 'my-dashboard',
@@ -15,20 +15,20 @@ import {HeroService} from "../../services/hero.service";
 })
 
 export class DashboardComponent implements OnInit {
-    heroes: Hero[] = [];
+    rooms: Room[] = [];
 
     constructor(
         private router: Router,
-        private heroService: HeroService) {
+        private roomService: RoomService) {
     }
 
     ngOnInit() {
-        this.heroService.getHeroes()
-            .then(heroes => this.heroes = heroes);
+        this.roomService.getRooms()
+            .then(rooms => this.rooms = rooms);
     }
 
-    gotoDetail(hero: Hero) {
-        let link = ['/detail', hero._id];
+    gotoDetail(room: Room) {
+        const link = ['/session', room._id];
         this.router.navigate(link);
     }
 }

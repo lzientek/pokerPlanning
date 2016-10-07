@@ -35,12 +35,7 @@
     "no-unused-variable": true,
     "no-unreachable": true,
     "no-consecutive-blank-lines": true,
-    "no-trailing-comma": false,
     "no-var-keyword": true,
-    "quotemark": [
-      true,
-      "single"
-    ],
     "no-use-before-declare": true,
     "one-line": [
       true,
@@ -61,8 +56,9 @@
       "check-branch",
       "check-decl",
       "check-operator",
-      "check-separator"
-    ],
-    
+      "check-separator",
+      "check-typecast",
+      "check-type"
+    ]
   }
 }
