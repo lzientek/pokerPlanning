@@ -24,13 +24,12 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     }
 
     update (_id: string, item: IRoomModel, callback: (error: any, result: any) => void) {
-
         this._roomRepository.findById(_id, (err, res) => {
-            if(err) callback(err, res);
-
-            else
+            if (err) {
+                callback(err, res);
+            } else {
                 this._roomRepository.update(res._id, item, callback);
-
+            }
         });
     }
 
@@ -59,7 +58,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 for (var index = res.users.length - 1; index >= 0; index--) {
-                    if (res.users[index]._id == _userId) {
+                    if (res.users[index]._id === _userId) {
                         res.users.splice(index, 1);
                     }
                 }
@@ -85,7 +84,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 for (var index = res.users.length - 1; index > 0; index--) {
-                    if (res.cards[index]._id == item._id) {
+                    if (res.cards[index]._id === item._id) {
                         res.cards[index] = item;
                     }
                 }
