@@ -1,9 +1,7 @@
 #!/usr/bin/env node
 
+var server = require('../server').server;
 var app = require('../server').app;
-var http = require('http');
-
-var server = http.createServer(app);
 
 server.listen(app.get('port'), function(){
     var host = server.address().address;

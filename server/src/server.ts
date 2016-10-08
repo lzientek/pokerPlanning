@@ -1,15 +1,19 @@
 /// <reference path="../typings/index.d.ts" />
+import BaseRoutes from "./config/routes/Routes";
+import * as bodyParser from "body-parser";
+import * as express from 'express';
+import * as http from 'http';
+import * as path from 'path';
+import SocketController from './controllers/SocketController';
 
-import express = require('express');
-import BaseRoutes = require("./config/routes/Routes");
-import bodyParser = require("body-parser");
+const port: number = process.env.PORT || 3000;
+const env: string = process.env.NODE_ENV || 'developement';
 
-import path = require('path');
-var port: number = process.env.PORT || 3000;
-var env:string = process.env.NODE_ENV || 'developement';
+const app = express();
 
-var app = express();
+const server = http.createServer(app);
 
+new SocketController(server);
 app.set('port', port);
 
 app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
@@ -18,17 +22,16 @@ app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
 // for system.js to work. Can be removed if bundling.
 app.use(express.static(path.resolve(__dirname, '../client')));
 app.use(express.static(path.resolve(__dirname, '../../node_modules')));
-
 app.use(bodyParser.json());
 app.use('/api', new BaseRoutes().routes);
 
-var renderIndex = (req: express.Request, res: express.Response) => {
+let renderIndex = (req: express.Request, res: express.Response) => {
     res.sendFile(path.resolve(__dirname, '../client/index.html'));
-}
+};
 
 app.get('/*', renderIndex);
 
-if(env === 'developement'){
+if (env === 'developement') {
     app.use(function(err, req: express.Request, res: express.Response, next: express.NextFunction) {
         res.status(err.status || 500);
         res.json({
@@ -38,7 +41,6 @@ if(env === 'developement'){
     });
 }
 
-
 // catch 404 and forward to error handler
 app.use(function(req: express.Request, res: express.Response, next) {
     let err = new Error("Not Found");
@@ -47,7 +49,8 @@ app.use(function(req: express.Request, res: express.Response, next) {
 
 // production error handler
 // no stacktrace leaked to user
-app.use(function(err: any, req: express.Request, res: express.Response, next: express.NextFunction) {
+app.use(function(err: any, req: express.Request, res: express.Response
+    , next: express.NextFunction) {
     res.status(err.status || 500);
     res.json({
         error: {},
@@ -55,4 +58,4 @@ app.use(function(err: any, req: express.Request, res: express.Response, next: ex
     });
 });
 
-export { app }
+export { app, server };

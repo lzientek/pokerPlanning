@@ -4,7 +4,7 @@
 
 import {Injectable} from '@angular/core';
 
-import { Headers, Http, Response } from '@angular/http';
+import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Room } from "../models/Room";
 

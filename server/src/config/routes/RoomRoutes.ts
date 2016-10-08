@@ -6,7 +6,7 @@ import express = require("express");
 import RoomController = require("./../../controllers/RoomController");
 import UserController = require("./../../controllers/UserController");
 
-var router = express.Router();
+const router = express.Router();
 class RoomRoutes {
     private _roomController: RoomController;
     private _userController: UserController;
@@ -26,8 +26,6 @@ class RoomRoutes {
         router.delete("/:_id/user/:_userId", this._userController.removeUser);
         return router;
     }
-
-
 }
 
 Object.seal(RoomRoutes);

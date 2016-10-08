@@ -11,10 +11,9 @@ class RoomController implements IBaseController <RoomBusiness> {
 
     create(req: express.Request, res: express.Response): void {
         try {
-
-            var room: IRoomModel = <IRoomModel>req.body;
+            const room: IRoomModel = <IRoomModel> req.body;
             console.log(req.body);
-            var roomBusiness = new RoomBusiness();
+            const roomBusiness = new RoomBusiness();
             roomBusiness.create(room, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});
@@ -25,11 +24,12 @@ class RoomController implements IBaseController <RoomBusiness> {
             res.send({"error": "error in your request"});
         }
     }
+
     update(req: express.Request, res: express.Response): void {
         try {
-            var hero: IRoomModel = <IRoomModel>req.body;
-            var _id: string = req.params._id;
-            var roomBusiness = new RoomBusiness();
+            const hero: IRoomModel = <IRoomModel> req.body;
+            const _id: string = req.params._id;
+            const roomBusiness = new RoomBusiness();
             roomBusiness.update(_id, hero, (error, result) => {
                 if (error) {res.send({"error": "error"});
                 } else {res.send(result); };
@@ -40,11 +40,11 @@ class RoomController implements IBaseController <RoomBusiness> {
 
         }
     }
+
     delete(req: express.Request, res: express.Response): void {
         try {
-
-            var _id: string = req.params._id;
-            var roomBusiness = new RoomBusiness();
+            const _id: string = req.params._id;
+            const roomBusiness = new RoomBusiness();
             roomBusiness.delete(_id, (error, result) => {
                 if (error) {res.send({"error": error});
                 } else {res.send(result); }
@@ -55,10 +55,10 @@ class RoomController implements IBaseController <RoomBusiness> {
 
         }
     }
+
     retrieve(req: express.Request, res: express.Response): void {
         try {
-
-            var roomBusiness = new RoomBusiness();
+            const roomBusiness = new RoomBusiness();
             roomBusiness.retrieve((error, result) => {
                 if (error) {res.send({"error": error});
                 } else {res.send(result); }
@@ -68,11 +68,11 @@ class RoomController implements IBaseController <RoomBusiness> {
             res.send({"error": "error in your request"});
         }
     }
+
     findById(req: express.Request, res: express.Response): void {
         try {
-
-            var _id: string = req.params._id;
-            var roomBusiness = new RoomBusiness();
+            const _id: string = req.params._id;
+            const roomBusiness = new RoomBusiness();
             roomBusiness.findById(_id, (error, result) => {
                 if (error) {res.send({"error": error});
                 } else {res.send(result); }

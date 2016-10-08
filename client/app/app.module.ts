@@ -25,7 +25,7 @@ import { RoomService }  from './services/room.service';
     RoomComponent,
   ],
   providers: [
-    RoomService 
+    RoomService
   ],
   bootstrap: [AppComponent]
 })
