@@ -5,7 +5,7 @@
 import { User } from "./User";
 import { Card } from "./Card";
 
-export class Room {
+export default class Room {
     _id: string;
     name: string;
     creationDate: Date;

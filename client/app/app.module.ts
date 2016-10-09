@@ -8,6 +8,7 @@ import { routing }       from './app.routing';
 
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { RoomComponent }   from './components/room/room.component';
+import { JoinRoomComponent }   from './components/room/joinRoom.component';
 
 import { RoomService }  from './services/room.service';
 
@@ -21,7 +22,7 @@ import { RoomService }  from './services/room.service';
   declarations: [
     AppComponent,
     DashboardComponent,
-    DashboardComponent,
+    JoinRoomComponent,
     RoomComponent,
   ],
   providers: [

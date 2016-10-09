@@ -3,28 +3,23 @@
  */
 
 import {Component, OnInit} from '@angular/core';
+import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
-import * as io from 'socket.io-client/socket.io';
-import Room from "../../models/Room";
-import { RoomService } from "../../services/room.service";
 
+import { RoomService } from "../../services/room.service";
+import Room from '../../models/Room';
 @Component({
-    selector: 'my-rooms',
-    templateUrl: './app/components/room/room.component.html',
-    styleUrls: ['./app/components/dashboard/dashboard.component.css']
+    selector: 'my-join-room',
+    templateUrl: './app/components/room/joinRoom.component.html'
 })
 
-export class RoomComponent implements OnInit {
+export class JoinRoomComponent extends OnInit {
     room: Room = new Room();
-    socket: any = null;
     constructor(
+        private router: Router,
         private route: ActivatedRoute,
         private roomService: RoomService) {
-
-        this.socket = io('/');
-        this.socket.on('priceUpdate', function(data){
-            this.price = data;
-        }.bind(this));
+            super();
     }
 
     ngOnInit() {

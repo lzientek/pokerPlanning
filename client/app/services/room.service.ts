@@ -6,7 +6,7 @@ import {Injectable} from '@angular/core';
 
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Room } from "../models/Room";
+import Room from "../models/Room";
 
 @Injectable()
 export class RoomService {

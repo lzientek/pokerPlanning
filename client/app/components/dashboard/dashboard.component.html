@@ -1,8 +1,7 @@
 <h3>Rooms</h3>
 <div class="row">
-    <div *ngFor="let room of rooms" class="col-md-3" (click)="gotoDetail(room)" >
-        <div class="module hero" >
-            <h4>{{room.name}}</h4>
-        </div>
+    <div>
+        <input type="text" [(ngModel)]="roomName" placeholder="Name"/>
+        <button (click)="createRoom()" >Create {{roomName}}</button>
     </div>
 </div>

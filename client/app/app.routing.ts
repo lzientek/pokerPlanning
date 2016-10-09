@@ -15,6 +15,10 @@ const appRoutes: Routes = [
   {
     path: 'session/:id',
     component: RoomComponent
+  },
+  {
+    path: 'join/:id',
+    component: RoomComponent
   }
 ];
 

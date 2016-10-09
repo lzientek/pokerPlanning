@@ -2,33 +2,39 @@
  * Created by Lzientek on 01-10-2016
  */
 
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Room } from "../../models/Room";
 import { RoomService } from "../../services/room.service";
-
+import Room from '../../models/Room';
 @Component({
     selector: 'my-dashboard',
     templateUrl: './app/components/dashboard/dashboard.component.html',
     styleUrls: ['./app/components/dashboard/dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
-    rooms: Room[] = [];
-
+export class DashboardComponent {
+    roomName: string = '';
+    roomId: string = '';
     constructor(
         private router: Router,
         private roomService: RoomService) {
     }
 
-    ngOnInit() {
-        this.roomService.getRooms()
-            .then(rooms => this.rooms = rooms);
+    createRoom() {
+        const room: Room = new Room();
+        room.name = this.roomName;
+        this.roomService.save(room)
+            .then((result) => {
+                this.router.navigateByUrl(`/join/${result._id}`);
+            })
+            .catch((err) => {
+                alert(`Une erreur est survenue ${err.message}`);
+            });
+
     }
 
-    gotoDetail(room: Room) {
-        const link = ['/session', room._id];
-        this.router.navigate(link);
+    joinRoom() {
+
     }
 }
