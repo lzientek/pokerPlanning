@@ -22,9 +22,6 @@ export class RoomComponent implements OnInit {
         private roomService: RoomService) {
 
         this.socket = io('/');
-        this.socket.on('priceUpdate', function(data){
-            this.price = data;
-        }.bind(this));
     }
 
     ngOnInit() {
