@@ -5,14 +5,15 @@
             "name": "Launch",
             "type": "node",
             "request": "launch",
-            "program": "${workspaceRoot}/bin/server/server.js",
+            "program": "${workspaceRoot}/src/server/server.ts",
             "stopOnEntry": false,
-            "cwd": "${workspaceRoot}/bin/",
+            "cwd": "${workspaceRoot}/src/",
             "env": {
                 "NODE_ENV": "development"
             },
             "console": "internalConsole",
-            "sourceMaps": true
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/bin"
         },
         {
             "name": "Attach",
@@ -21,10 +22,7 @@
             "port": 5858,
             "address": "localhost",
             "restart": false,
-            "sourceMaps": true,
-            "outFiles": [],
-            "localRoot": "${workspaceRoot}",
-            "remoteRoot": null
+            "sourceMaps": true
         },
         {
             "name": "Attach to Process",
@@ -32,8 +30,7 @@
             "request": "attach",
             "processId": "${command.PickProcess}",
             "port": 5858,
-            "sourceMaps": false,
-            "outFiles": []
+            "sourceMaps": true
         }
     ]
 }

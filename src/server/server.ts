@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="../../typings/index.d.ts" />
 import BaseRoutes from "./config/routes/Routes";
 import * as bodyParser from "body-parser";
 import * as express from 'express';
