@@ -7,7 +7,7 @@
     "compile": "gulp compile",
     "build": "gulp build",
     "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
-    "postinstall": "gulp installTypings"
+    "postinstall": "typings install"
   },
   "repository": {
     "type": "git",

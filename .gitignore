@@ -1,5 +1,5 @@
 build/**
-**/typings/**
+typings/**
 bin/**
 node_modules/**
 *.log

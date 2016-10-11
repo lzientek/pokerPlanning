@@ -59,3 +59,8 @@ app.use(function(err: any, req: express.Request, res: express.Response
 });
 
 export { app, server };
+server.listen(app.get('port'), function(){
+    let host = server.address().address;
+    let port = server.address().port;
+    console.log('This express angular app is listening on port:' + port);
+});
