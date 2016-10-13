@@ -4,7 +4,6 @@
 
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import * as io from 'socket.io-client/socket.io';
 import Room from "../../models/Room";
 import { RoomService } from "../../services/room.service";
 
@@ -21,7 +20,6 @@ export class RoomComponent implements OnInit {
         private route: ActivatedRoute,
         private roomService: RoomService) {
 
-        this.socket = io('/');
     }
 
     ngOnInit() {
