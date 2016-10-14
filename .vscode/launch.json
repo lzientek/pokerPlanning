@@ -31,6 +31,23 @@
             "processId": "${command.PickProcess}",
             "port": 5858,
             "sourceMaps": true
+        },
+        {
+            "name": "Launch Chrome against localhost, with sourcemaps",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:3000",
+            "sourceMaps": true,
+            "userDataDir": "test-user",
+            "webRoot": "${workspaceRoot}/client"
+        },
+        {
+            "name": "Attach to Chrome, with sourcemaps",
+            "type": "chrome",
+            "request": "attach",
+            "port": 9222,
+            "sourceMaps": true,
+            "webRoot": "${workspaceRoot}/client"
         }
     ]
 }
