@@ -1,4 +1,8 @@
 
+install:
+	@echo "install npm packages"
+	@npm install
+
 copy-frontend-dependencies:
 	@echo "copy dependencies"
 	@mkdir -p ./bin/client/libs/core-js/client/
