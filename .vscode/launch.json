@@ -39,7 +39,7 @@
             "url": "http://localhost:3000",
             "sourceMaps": true,
             "userDataDir": "test-user",
-            "webRoot": "${workspaceRoot}/client"
+            "webRoot": "${workspaceRoot}/src/client"
         },
         {
             "name": "Attach to Chrome, with sourcemaps",
@@ -47,7 +47,7 @@
             "request": "attach",
             "port": 9222,
             "sourceMaps": true,
-            "webRoot": "${workspaceRoot}/client"
+            "webRoot": "${workspaceRoot}/src/client"
         }
     ]
 }
