@@ -6,13 +6,11 @@ var isPublic = typeof window != "undefined";
     'app':                        'app', // 'dist',
     '@angular':                   (isPublic)? '@angular' : 'node_modules/@angular',
     'rxjs':                       (isPublic)? 'rxjs' : 'node_modules/rxjs',
-    'socket.io-client':           (isPublic)? 'socket.io-client' : 'node_modules/socket.io-client'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {
     'app':                        { main: 'main.js',  defaultExtension: 'js' },
     'rxjs':                       { defaultExtension: 'js' },
-    'socket.io-client':           { defaultExtension: 'js' }
   };
   var ngPackageNames = [
     'common',

@@ -1,6 +1,8 @@
 /**
  * Created by Lzientek on 01-10-2016
  */
+/* GLOBAL io */
+declare var io: any;
 
 import {Component, OnInit} from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -27,6 +29,7 @@ export class RoomComponent implements OnInit {
             let id = params['id'];
             this.roomService.getRoom(id)
                 .then(room => this.room = room);
+            this.socket = io('http://localhost');
         });
     }
 }
