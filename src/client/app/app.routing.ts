@@ -1,7 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { DashboardComponent }   from './components/dashboard/dashboard.component';
-import { RoomComponent }   from './components/room/room.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { RoomComponent } from './components/room/room.component';
+import { JoinRoomComponent } from './components/room/joinRoom.component';
 
 const appRoutes: Routes = [
   {
@@ -13,12 +14,12 @@ const appRoutes: Routes = [
   //   component: DashboardComponent
   // },
   {
-    path: 'session/:id',
+    path: 'room/:id',
     component: RoomComponent
   },
   {
     path: 'join/:id',
-    component: RoomComponent
+    component: JoinRoomComponent
   }
 ];
 

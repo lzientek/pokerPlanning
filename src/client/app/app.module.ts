@@ -11,13 +11,14 @@ import { RoomComponent }   from './components/room/room.component';
 import { JoinRoomComponent }   from './components/room/joinRoom.component';
 
 import { RoomService }  from './services/room.service';
+import { UserService }  from './services/user.service';
 
 @NgModule({
   imports: [
     BrowserModule,
     HttpModule,
     FormsModule,
-    routing
+    routing,
     ],
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { RoomService }  from './services/room.service';
     RoomComponent,
   ],
   providers: [
-    RoomService
+    RoomService,
+    UserService,
   ],
   bootstrap: [AppComponent]
 })

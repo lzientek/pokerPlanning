@@ -1,2 +1,8 @@
 <h3></h3>
-<p></p>
+<div class="row">
+    <div>
+        <input type="text" [(ngModel)]="nUser.name" placeholder="Name"/><br/>
+        <input type="checkbox" [(ngModel)]="nUser.isSpectator" /> is spectator
+        <button (click)="joinRoom()" >join {{room.name}}</button>
+    </div>
+</div>

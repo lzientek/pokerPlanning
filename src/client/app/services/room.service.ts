@@ -41,13 +41,13 @@ export class RoomService {
             'Content-Type': 'application/json'});
 
         return this.http
-            .post(this.roomsUrl, JSON.stringify(room), {headers:headers})
+            .post(this.roomsUrl, JSON.stringify(room), {headers: headers})
             .toPromise()
-            .then(response => response.json().data)
+            .then(response =>  response.json())
             .catch(this.handleError);
     }
 
-    private put(room: Room) {
+    private put(room: Room): Promise<Room> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
@@ -71,6 +71,8 @@ export class RoomService {
             .toPromise()
             .catch(this.handleError);
     }
+
+    addUser(User: user)
 
     private handleError(error: any) {
         console.error('An error occurred', error);

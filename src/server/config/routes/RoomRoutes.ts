@@ -22,8 +22,8 @@ class RoomRoutes {
         router.get("/:_id", this._roomController.findById);
         router.delete("/:_id", this._roomController.delete);
 
-        router.post("/:_id/user", this._userController.addUser);
-        router.delete("/:_id/user/:_userId", this._userController.removeUser);
+        router.post("/:_id/users", this._userController.addUser);
+        router.delete("/:_id/users/:_userId", this._userController.removeUser);
         return router;
     }
 }

@@ -10,10 +10,10 @@ class UserController {
 
     addUser(req: express.Request, res: express.Response): void {
         try {
-            var _id: string = req.params._id;
+            const _id: string = req.params._id;
 
-            var user: IUserModel = <IUserModel>req.body;
-            var roomBusiness = new RoomBusiness();
+            const user: IUserModel = <IUserModel> req.body;
+            const roomBusiness = new RoomBusiness();
             roomBusiness.addUser(_id, user, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});

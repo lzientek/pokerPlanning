@@ -53,16 +53,16 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     }
 
     removeUser (_id: string, _userId: string, callback: (error: any, result: any) => void) {
-        this._roomRepository.findById(_id, (err, res) => {
+        this._roomRepository.findById(_id, (err, room) => {
             if (err) {
                 callback(err, null);
             } else {
-                for (var index = res.users.length - 1; index >= 0; index--) {
-                    if (res.users[index]._id === _userId) {
-                        res.users.splice(index, 1);
+                for (var index = room.users.length - 1; index >= 0; index--) {
+                    if (room.users[index]._id === _userId) {
+                        room.users.splice(index, 1);
                     }
                 }
-                this._roomRepository.update(res._id, res, callback);
+                this._roomRepository.update(room._id, room, error => callback(error, room));
             }
         });
     }
@@ -73,7 +73,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 res.cards.push(item);
-                this._roomRepository.update(res._id, res, callback);
+                this._roomRepository.update(res._id, res, error => callback(error, res));
             }
         });
     }

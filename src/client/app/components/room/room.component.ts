@@ -25,11 +25,12 @@ export class RoomComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.socket = io();
         this.route.params.forEach((params: Params) => {
             let id = params['id'];
             this.roomService.getRoom(id)
                 .then(room => this.room = room);
-            this.socket = io('http://localhost');
+            this.socket.emit('join_room', { roomId: id });
         });
     }
 }
