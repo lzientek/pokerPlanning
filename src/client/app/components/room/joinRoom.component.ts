@@ -37,9 +37,10 @@ export class JoinRoomComponent extends OnInit {
     }
 
     joinRoom() {
-        this.roomService.add(room)
+        this.userService.addUser(this.room._id, this.nUser)
             .then((result) => {
-                this.router.navigateByUrl(`/join/${result._id}`);
+                //todo: save the current user
+                this.router.navigateByUrl(`/room/${this.room._id}`);
             })
             .catch((err) => {
                 alert(`Une erreur est survenue ${err.message}`);

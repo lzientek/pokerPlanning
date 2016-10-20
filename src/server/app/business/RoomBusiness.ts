@@ -41,13 +41,13 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         this._roomRepository.findById(_id, callback);
     }
 
-    addUser (_id: string, item: IUserModel, callback: (error: any, result: IRoomModel) => void) {
+    addUser (_id: string, item: IUserModel, callback: (error: any, result: IUserModel) => void) {
         this._roomRepository.findById(_id, (err, res) => {
             if (err) {
                 callback(err, null);
             } else {
                 res.users.push(item);
-                this._roomRepository.update(res._id, res, callback);
+                this._roomRepository.update(res._id, res, error => callback(error, item));
             }
         });
     }

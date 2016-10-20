@@ -15,7 +15,7 @@ export class UserService {
 
     constructor(private http: Http) { }
 
-    addUser(id: number, user: User) {
+    addUser(id: string, user: User) {
         let headers = new Headers({
             'Content-Type': 'application/json'});
         return this.http
