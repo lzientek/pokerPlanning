@@ -33,7 +33,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         });
     }
 
-    delete (_id: string, callback:(error: any, result: any) => void) {
+    delete (_id: string, callback: (error: any, result: any) => void) {
         this._roomRepository.delete(_id , callback);
     }
 
@@ -42,13 +42,8 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     }
 
     addUser (_id: string, item: IUserModel, callback: (error: any, result: IUserModel) => void) {
-        this._roomRepository.findById(_id, (err, res) => {
-            if (err) {
-                callback(err, null);
-            } else {
-                res.users.push(item);
-                this._roomRepository.update(res._id, res, error => callback(error, item));
-            }
+        this._roomRepository.addUser(_id, item, (error, val) => {
+            callback(error, val.users[val.users.length - 1]);
         });
     }
 

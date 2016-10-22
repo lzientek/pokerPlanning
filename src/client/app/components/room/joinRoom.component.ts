@@ -39,7 +39,7 @@ export class JoinRoomComponent extends OnInit {
     joinRoom() {
         this.userService.addUser(this.room._id, this.nUser)
             .then((result) => {
-                //todo: save the current user
+                localStorage.setItem('userId', result._id);
                 this.router.navigateByUrl(`/room/${this.room._id}`);
             })
             .catch((err) => {

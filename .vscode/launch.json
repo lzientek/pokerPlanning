@@ -22,7 +22,8 @@
             "port": 5858,
             "address": "localhost",
             "restart": false,
-            "sourceMaps": true
+            "sourceMaps": true,
+            "outDir": "${workspaceRoot}/bin"
         },
         {
             "name": "Attach to Process",

@@ -14,8 +14,8 @@ copy-frontend-dependencies:
 	@cp ./node_modules/reflect-metadata/Reflect.js.map ./bin/client/libs/reflect-metadata/Reflect.js.map
 	@mkdir -p ./bin/client/libs/systemjs/dist/
 	@cp ./node_modules/systemjs/dist/system.src.js ./bin/client/libs/systemjs/dist/system.src.js
-	@mkdir -p ./bin/client/libs/socket.io-client/
-	@cp ./node_modules/socket.io-client/socket.io.js ./bin/client/libs/socket.io-client/socket.io.js
+	@mkdir -p ./bin/client/libs/socket.io/
+	@cp ./node_modules/socket.io-client/socket.io.js ./bin/client/libs/socket.io/socket.io.js
 
 build:
 	@rm -rf ./bin/* || true

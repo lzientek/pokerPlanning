@@ -9,10 +9,6 @@ const appRoutes: Routes = [
     path: '',
     component: DashboardComponent
   },
-  // {
-  //   path: '/start',
-  //   component: DashboardComponent
-  // },
   {
     path: 'room/:id',
     component: RoomComponent
