@@ -4,28 +4,28 @@
 
 import express = require('express');
 import RoomBusiness = require("./../app/business/RoomBusiness");
-import IUserModel = require("./../app/model/UserModel");
+import ICardModel = require("./../app/model/CardModel");
 import SocketController from './SocketController';
 
-class UserController {
+class CardController {
     socket: SocketController;
+    roomBusiness: RoomBusiness;
 
     constructor() {
         this.socket = SocketController.getInstance();
+        this.roomBusiness = new RoomBusiness();
     }
 
-    addUser(req: express.Request, res: express.Response): void {
+    addCard(req: express.Request, res: express.Response): void {
         try {
             const _id: string = req.params._id;
-
-            const user: IUserModel = <IUserModel> req.body;
-            const roomBusiness = new RoomBusiness();
-            roomBusiness.addUser(_id, user, (error, result) => {
+            const card: ICardModel = <ICardModel> req.body;
+            this.roomBusiness.addCard(_id, card, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});
                 } else {
                     res.send(result);
-                    this.socket.addUser(_id, result);
+                    this.socket.upsertCard(_id, result);
                 }
             });
         } catch (e)  {
@@ -34,16 +34,18 @@ class UserController {
         }
     }
 
-    removeUser(req: express.Request, res: express.Response): void {
+    updateCard(req: express.Request, res: express.Response): void {
         try {
-            var _id: string = req.params._id;
-            var _userId: string = req.params._userId;
+            const _id: string = req.params._id;
+            const card: ICardModel = <ICardModel> req.body;
 
-            var roomBusiness = new RoomBusiness();
-            roomBusiness.removeUser(_id, _userId, (error, result) => {
+            this.roomBusiness.updateCard(_id, card, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});
-                } else {res.send(result); }
+                } else {
+                    res.send(result);
+                    this.socket.upsertCard(_id, result);
+                }
             });
         } catch (e)  {
             console.log(e);
@@ -51,4 +53,4 @@ class UserController {
         }
     }
 }
-export = UserController;
+export = CardController;

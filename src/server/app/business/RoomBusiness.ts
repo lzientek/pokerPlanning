@@ -62,28 +62,28 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         });
     }
 
-    addCard (_id: string, item: ICardModel, callback: (error: any, result: IRoomModel) => void) {
+    addCard (_id: string, item: ICardModel, callback: (error: any, result: ICardModel) => void) {
         this._roomRepository.findById(_id, (err, res) => {
             if (err) {
                 callback(err, null);
             } else {
                 res.cards.push(item);
-                this._roomRepository.update(res._id, res, error => callback(error, res));
+                this._roomRepository.update(res._id, res, error => callback(error, res.cards[res.cards.length - 1]));
             }
         });
     }
 
-    updateCard (_id: string, item: ICardModel, callback: (error: any, result: IRoomModel) => void) {
+    updateCard (_id: string, item: ICardModel, callback: (error: any, result: ICardModel) => void) {
         this._roomRepository.findById(_id, (err, res) => {
             if (err) {
                 callback(err, null);
             } else {
-                for (var index = res.users.length - 1; index > 0; index--) {
+                for (let index = res.users.length - 1; index > 0; index--) {
                     if (res.cards[index]._id === item._id) {
                         res.cards[index] = item;
                     }
                 }
-                this._roomRepository.update(res._id, res, callback);
+                this._roomRepository.update(res._id, res, error => callback(error, item));
             }
         });
     }
