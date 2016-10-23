@@ -17,9 +17,10 @@ export default class SocketController {
     }
 
     private connectionHandler(socket: SocketIO.Socket) {
+        const $this = this;
         socket.on('join_room', (values) => {
-            this.joinRoom(socket, values);
-            socket.on('disconnect', () => this.disconnectFromRoom(values.roomId, values.userId));
+            $this.joinRoom(socket, values);
+            socket.on('disconnect', () => $this.disconnectFromRoom(values.roomId, values.userId));
         });
     }
 
