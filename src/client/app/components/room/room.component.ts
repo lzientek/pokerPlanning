@@ -18,19 +18,29 @@ import { RoomService } from "../../services/room.service";
 export class RoomComponent implements OnInit {
     room: Room = new Room();
     socket: any = null;
+    userId: string;
+
+    cardTitle: string;
+
     constructor(
         private route: ActivatedRoute,
         private roomService: RoomService) {
-
+            this.userId = localStorage.getItem('userId');
     }
 
     ngOnInit() {
         this.socket = io();
         this.route.params.forEach((params: Params) => {
-            let id = params['id'];
-            this.roomService.getRoom(id)
+            const roomId = params['id'];
+            this.socket.emit('join_room', { roomId: roomId });
+            this.roomService.getRoom(roomId)
                 .then(room => this.room = room);
-            this.socket.emit('join_room', { roomId: id });
         });
     }
+
+    createCard() {
+
+    }
+
+
 }

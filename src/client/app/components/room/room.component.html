@@ -2,11 +2,13 @@
     <h2>{{room.name}}</h2>
     <h3>cards</h3>
     <div *ngFor="let card of room.cards" class="col-md-3">
-            <p>card name : {{card.title}}</p>
+        <p>card name : {{card.title}}</p>
     </div>
-
+    <div class="col-md-12">
+        <input type="text" placeholder="card title" [(ngModel)]="cardTitle" /> <button  (click)="createCard()" >New card</button>
+    </div>
     <h3>users</h3>
     <div *ngFor="let user of room.users" class="col-md-3">
-            <p>user name : {{user.name}}</p>
+        <p>user name : {{user.name}}</p>
     </div>
 </div>
