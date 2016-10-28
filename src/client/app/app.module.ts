@@ -12,6 +12,7 @@ import { JoinRoomComponent }   from './components/room/joinRoom.component';
 
 import { RoomService }  from './services/room.service';
 import { UserService }  from './services/user.service';
+import { CardService }  from './services/card.service';
 
 @NgModule({
   imports: [
@@ -29,6 +30,7 @@ import { UserService }  from './services/user.service';
   providers: [
     RoomService,
     UserService,
+    CardService,
   ],
   bootstrap: [AppComponent]
 })

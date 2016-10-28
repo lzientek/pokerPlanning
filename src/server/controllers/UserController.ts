@@ -8,12 +8,6 @@ import IUserModel = require("./../app/model/UserModel");
 import SocketController from './SocketController';
 
 class UserController {
-    socket: SocketController;
-
-    constructor() {
-        this.socket = SocketController.getInstance();
-    }
-
     addUser(req: express.Request, res: express.Response): void {
         try {
             const _id: string = req.params._id;
@@ -25,7 +19,7 @@ class UserController {
                     res.send({"error": "error"});
                 } else {
                     res.send(result);
-                    this.socket.addUser(_id, result);
+                    SocketController.getInstance().addUser(_id, result);
                 }
             });
         } catch (e)  {
@@ -36,10 +30,10 @@ class UserController {
 
     removeUser(req: express.Request, res: express.Response): void {
         try {
-            var _id: string = req.params._id;
-            var _userId: string = req.params._userId;
+            let _id: string = req.params._id;
+            let _userId: string = req.params._userId;
 
-            var roomBusiness = new RoomBusiness();
+            let roomBusiness = new RoomBusiness();
             roomBusiness.removeUser(_id, _userId, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});

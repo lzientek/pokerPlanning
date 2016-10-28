@@ -11,4 +11,8 @@ export default class Room {
     creationDate: Date;
     users: User[];
     cards: Card[];
+    constructor() {
+        this.users = [];
+        this.cards = [];
+    }
 }

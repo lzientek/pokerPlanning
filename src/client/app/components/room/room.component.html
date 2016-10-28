@@ -1,14 +1,30 @@
 <div class="row">
     <h2>{{room.name}}</h2>
-    <h3>cards</h3>
-    <div *ngFor="let card of room.cards" class="col-md-3">
-        <p>card name : {{card.title}}</p>
+    
+    <div class="row" *ngIf="vote.cardId != null">
+        <div class="col-md-8">
+            <div class="col-md-3" (click)="selectVoteValue(0.5)" >0,5</div>
+            <div class="col-md-3" (click)="selectVoteValue(1)" >1</div>
+            <div class="col-md-3" (click)="selectVoteValue(2)" >2</div>
+            <div class="col-md-3" (click)="selectVoteValue(3)" >3</div>
+            <div class="col-md-3" (click)="selectVoteValue(5)" >5</div>
+        </div>
+        <div class="col-md-4">
+            <h4>{{getCardById(vote.cardId).title}}</h4>
+            <ul>
+                <li *ngFor="let user of room.users" class="col-md-3">
+                    {{user.name}}
+                </li>
+            </ul>
+        </div>
     </div>
+
     <div class="col-md-12">
         <input type="text" placeholder="card title" [(ngModel)]="cardTitle" /> <button  (click)="createCard()" >New card</button>
     </div>
-    <h3>users</h3>
-    <div *ngFor="let user of room.users" class="col-md-3">
-        <p>user name : {{user.name}}</p>
+
+    <h3>cards</h3>
+    <div *ngFor="let card of room.cards" class="col-md-3">
+        <p>card name : {{card.title}}</p>
     </div>
 </div>
