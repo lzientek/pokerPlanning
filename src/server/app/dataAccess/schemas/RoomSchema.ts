@@ -6,14 +6,15 @@ import DataAccess = require('../DataAccess');
 import IRoomModel = require("./../../model/RoomModel");
 import UserSchema = require('./UserSchema');
 import CardSchema = require('./CardSchema');
+import VoteSchema = require('./VoteSchema');
 
-var mongoose = DataAccess.mongooseInstance;
-var mongooseConnection = DataAccess.mongooseConnection;
+let mongoose = DataAccess.mongooseInstance;
+let mongooseConnection = DataAccess.mongooseConnection;
 
 class RoomSchema {
 
     static get schema () {
-        var schema =  mongoose.Schema({
+        let schema =  mongoose.Schema({
             name : {
                 type: String,
                 required: true
@@ -28,11 +29,14 @@ class RoomSchema {
             },
             cards: {
                 type: [CardSchema.schema],
+            },
+            votes: {
+                type: [VoteSchema.schema],
             }
         });
 
         return schema;
     }
 }
-var schema = mongooseConnection.model<IRoomModel>("Room", RoomSchema.schema);
+const schema = mongooseConnection.model<IRoomModel>("Room", RoomSchema.schema);
 export = schema;

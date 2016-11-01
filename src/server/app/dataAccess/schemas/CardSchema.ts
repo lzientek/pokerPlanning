@@ -4,12 +4,12 @@
 
 import DataAccess = require('../DataAccess');
 
-var mongoose = DataAccess.mongooseInstance;
+const mongoose = DataAccess.mongooseInstance;
 
 class CardSchema {
 
     static get schema () {
-        var schema =  mongoose.Schema({
+        const schema =  mongoose.Schema({
             title : {
                 type: String,
                 required: false

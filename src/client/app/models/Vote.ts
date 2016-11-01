@@ -6,7 +6,8 @@ export default class Vote {
     cardId: string;
     actualVote: number;
     waitingForOther: boolean;
-    peopleWhoVoted: [ string ];
+    userIdWaiting: string[];
+    peopleWhoVoted: {id: string, voteValue: number}[];
 
     constructor(cardId: string = null) {
         this.cardId = cardId;

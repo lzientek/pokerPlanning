@@ -7,6 +7,8 @@ import BaseBusiness = require("./BaseBusiness");
 import IRoomModel = require("./../model/RoomModel");
 import IUserModel = require("./../model/UserModel");
 import ICardModel = require("./../model/CardModel");
+import IVoteModel = require("./../model/VoteModel");
+import VoteResult = require("./../model/VoteResult");
 
 class RoomBusiness implements BaseBusiness<IRoomModel> {
     private _roomRepository: RoomRepository;
@@ -52,7 +54,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
             if (err) {
                 callback(err, null);
             } else {
-                for (var index = room.users.length - 1; index >= 0; index--) {
+                for (let index = room.users.length - 1; index >= 0; index--) {
                     if (room.users[index]._id === _userId) {
                         room.users.splice(index, 1);
                     }
@@ -68,7 +70,8 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 res.cards.push(item);
-                this._roomRepository.update(res._id, res, error => callback(error, res.cards[res.cards.length - 1]));
+                this._roomRepository.update(res._id, res
+                    , error => callback(error, res.cards[res.cards.length - 1]));
             }
         });
     }
@@ -85,6 +88,31 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 }
                 this._roomRepository.update(res._id, res, error => callback(error, item));
             }
+        });
+    }
+
+    addVote(_id: string, item: IVoteModel, callback: (error: any, result: VoteResult) => void) {
+        this._roomRepository.addVote(_id, item, (error, val) => {
+            let res = new VoteResult(null, null);
+            if (!error && val) {
+                const users: string[] = [];
+                const usersWhoVoted: {id: string, voteValue: number }[] = [];
+                const actualVote = val.votes.filter(vote => { return vote.cardId === item.cardId; });
+
+                for (let j = 0; j < val.users.length; j++) {
+                    users.push(val.users[j]._id);
+                }
+                for (let i = 0; i < actualVote.length; i++) {
+                    usersWhoVoted.push({ id: actualVote[i].userId, voteValue: actualVote[i].voteValue });
+                    const index = users.indexOf(actualVote[i].userId);
+                    if (index >= 0) {
+                        users.splice(index, 1);
+                    }
+                }
+
+                res = new VoteResult(users, usersWhoVoted);
+            }
+            callback(error, res);
         });
     }
 }

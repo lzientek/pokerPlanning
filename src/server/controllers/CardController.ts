@@ -5,6 +5,7 @@
 import express = require('express');
 import RoomBusiness = require("./../app/business/RoomBusiness");
 import ICardModel = require("./../app/model/CardModel");
+import IVoteModel = require("./../app/model/VoteModel");
 import SocketController from './SocketController';
 
 class CardController {
@@ -46,5 +47,21 @@ class CardController {
             res.send({"error": "error in your request"});
         }
     }
+
+    addVote(req: express.Request, res: express.Response): void {
+        const _id: string = req.params._id;
+        const _cardId: string = req.params._cardId;
+        const vote: IVoteModel = <IVoteModel> req.body;
+        vote.cardId = _cardId;
+        new RoomBusiness().addVote(_id, vote, (error, result) => {
+            if (error) {
+                res.send({"error": "error"});
+            } else {
+                res.send(result);
+                SocketController.getInstance().addVote(_id, result);
+            }
+        });
+    }
+
 }
 export = CardController;

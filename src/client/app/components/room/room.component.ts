@@ -38,13 +38,16 @@ export class RoomComponent implements OnInit {
             this.socket.emit('join_room', { roomId: roomId });
             this.socket.on('upsert_card', this.upsertCard.bind(this));
             this.roomService.getRoom(roomId)
-                .then(room => this.room = room);
+                .then((room: Room) => {
+                    if (room.cards && room.cards.length > 0) {
+                        this.vote.cardId = room.cards[room.cards.length - 1]._id;
+                    }
+                    this.room = room;
+                });
         });
     }
 
     upsertCard(card: Card) {
-        console.log('this', this);
-        console.log('card', card);
         for (let i = 0; i < this.room.cards.length; i++) {
             if (this.room.cards[i]._id === card._id) {
                 this.room.cards[i] = card;
@@ -75,7 +78,12 @@ export class RoomComponent implements OnInit {
     }
 
     selectVoteValue(value: number) {
-        console.log(value);
+        this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
+            .then(result => {
+                this.vote.actualVote = value;
+                this.vote.peopleWhoVoted = result.userVoted;
+                this.vote.userIdWaiting = result.userIdWaiting;
+            }).catch(err => console.error('vote error:', err));
     }
 
 }

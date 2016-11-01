@@ -1,6 +1,7 @@
 import * as socketio from 'socket.io';
 import CardModel = require('../app/model/CardModel');
 import UserModel = require('../app/model/UserModel');
+import VoteResult = require('../app/model/VoteResult');
 
 export default class SocketController {
     io: SocketIO.Server;
@@ -38,5 +39,9 @@ export default class SocketController {
 
     public upsertCard(roomId: string, card: CardModel) {
         this.io.to(roomId).emit('upsert_card', card);
+    }
+
+    public addVote(roomId: string, vote: VoteResult) {
+        this.io.to(roomId).emit('new_vote', vote);
     }
 }
