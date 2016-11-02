@@ -29,6 +29,7 @@ class RoomRoutes {
         router.delete("/:_id/users/:_userId", this._userController.removeUser);
 
         router.post("/:_id/cards/:_cardId/votes", this._cardController.addVote);
+        router.put("/:_id/cards/:_cardId/votes/:_voteId", this._cardController.updateVote);
         router.post("/:_id/cards", this._cardController.addCard);
         router.put("/:_id/cards/:_cardId", this._cardController.updateCard);
         return router;
