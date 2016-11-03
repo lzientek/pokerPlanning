@@ -23,7 +23,6 @@
     "@angular/router": "~3.0.1",
     "@angular/upgrade": "~2.0.1",
     "body-parser": "^1.15.2",
-    "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "express": "^4.14.0",
     "mongoose": "^4.6.1",
