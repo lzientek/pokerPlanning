@@ -18,14 +18,18 @@
             <h4>{{getCardById(vote.cardId).title}}</h4>
             <ul>
                 <li *ngFor="let user of room.users" class="col-md-3">
-                    {{user.name}}
+                    {{user.name}} 
+                    <span *ngIf="user.hasVoted"> Ok </span> 
+                    <span *ngIf="user.hasVoted===null"> Visitor </span> 
+                    <span *ngIf="!user.hasVoted"> Waiting </span> 
                 </li>
             </ul>
         </div>
     </div>
 
     <div class="col-md-12">
-        <input type="text" placeholder="card title" [(ngModel)]="cardTitle" /> <button  (click)="createCard()" >New card</button>
+        <input type="text" placeholder="card title" [(ngModel)]="cardTitle" />
+        <button  (click)="createCard()" >New card</button>
     </div>
 
     <h3>cards</h3>

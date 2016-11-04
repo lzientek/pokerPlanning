@@ -65,13 +65,11 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     }
 
     addCard (_id: string, item: ICardModel, callback: (error: any, result: ICardModel) => void) {
-        this._roomRepository.findById(_id, (err, res) => {
+        this._roomRepository.addCard(_id, item, (err, res) => {
             if (err) {
                 callback(err, null);
             } else {
-                res.cards.push(item);
-                this._roomRepository.update(res._id, res
-                    , error => callback(error, res.cards[res.cards.length - 1]));
+                callback(err, res.cards[res.cards.length - 1]);
             }
         });
     }
@@ -116,10 +114,13 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         if (!error && val) {
             const users: string[] = [];
             const usersWhoVoted: { id: string, voteValue: number }[] = [];
-            const actualVote = val.votes.filter(vote => { return vote.cardId === item.cardId; });
+            const actualVote = val.votes.filter(vote =>
+            { 
+                return vote.cardId === item.cardId;
+            });
 
             for (let j = 0; j < val.users.length; j++) {
-                users.push(val.users[j]._id);
+                users.push(val.users[j]._id.toHexString());
             }
             for (let i = 0; i < actualVote.length; i++) {
                 usersWhoVoted.push({ id: actualVote[i].userId, voteValue: actualVote[i].voteValue });

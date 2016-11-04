@@ -6,6 +6,7 @@ import express = require('express');
 import RoomBusiness = require("./../app/business/RoomBusiness");
 import ICardModel = require("./../app/model/CardModel");
 import IVoteModel = require("./../app/model/VoteModel");
+
 import SocketController from './SocketController';
 
 class CardController {
@@ -16,7 +17,7 @@ class CardController {
             const card: ICardModel = <ICardModel> req.body;
             new RoomBusiness().addCard(_id, card, (error, result) => {
                 if (error) {
-                    res.send({"error": "error"});
+                    res.send({"error": error});
                 } else {
                     res.send(result);
                     SocketController.getInstance().upsertCard(_id, result);
