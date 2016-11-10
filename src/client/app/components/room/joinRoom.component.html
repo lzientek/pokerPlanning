@@ -1,8 +1,18 @@
-<h3></h3>
 <div class="row">
-    <div>
-        <input type="text" [(ngModel)]="nUser.name" placeholder="Name"/><br/>
-        <input type="checkbox" [(ngModel)]="nUser.isSpectator" /> is spectator
-        <button (click)="joinRoom()" >join {{room.name}}</button>
+    <h3>Join the room {{room.name}}</h3>
+    
+    <div class="col-md-5">
+        <div class="form-group">
+            <label>
+                Choose a Username :
+            </label>
+            <input class="form-control" type="text" [(ngModel)]="nUser.name" placeholder="Username"/>
+        </div>
+        <div class="form-group">
+            <label class="checkbox">
+                <input type="checkbox" [(ngModel)]="nUser.isSpectator" /> is spectator
+            </label>
+        </div>
+        <button class="btn btn-primary" (click)="joinRoom()" >join {{room.name}}</button>
     </div>
 </div>

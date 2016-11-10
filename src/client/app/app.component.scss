@@ -1,6 +1,6 @@
-nav.navbar {
+.navbar {
     background: #26C281;
-    border-radius: 0px;
+    border-radius: 0;
     .navbar-brand {
         color: #ffffff;
     }
@@ -14,6 +14,7 @@ nav.navbar {
     background: #FFFFFF;
     border-top: 3px #00B16A solid;
     margin-top: 50px;
+    padding-top: 8px;
 
     h4 {
         color: #00B16A;

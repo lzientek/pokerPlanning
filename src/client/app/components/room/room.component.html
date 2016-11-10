@@ -19,7 +19,7 @@
             <h4>{{getCardById(vote.cardId).title}}</h4>
             <ul>
                 <li *ngFor="let user of room.users" class="col-md-3">
-                    {{user.name}} 
+                    {{user.name}}
                     <span *ngIf="user.hasVoted"> Ok </span> 
                     <span *ngIf="user.isVisitor"> Visitor </span> 
                     <span *ngIf="!user.hasVoted"> Waiting </span> 
@@ -27,12 +27,14 @@
             </ul>
         </div>
     </div>
-    <div *ngIf="vote" class="col-md-12">
+    <div *ngIf="vote.isConsensus" class="col-md-12">
         Consensus!
     </div>
     <div class="col-md-12">
-        <input type="text" placeholder="card title" [(ngModel)]="cardTitle" />
-        <button  (click)="createCard()" >New card</button>
+        <div class="form-group col-md-5">
+            <input class="form-control" type="text" placeholder="card title" [(ngModel)]="cardTitle" />
+        </div>
+        <button class="btn btn-primary" (click)="createCard()" >Estimate a new card</button>
     </div>
 
     <h3>cards</h3>

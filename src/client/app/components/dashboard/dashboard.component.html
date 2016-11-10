@@ -3,14 +3,18 @@
     <div class="col-md-4 col-md-offset-1">
         <h4>Create new poker planning room</h4>
         <div class="inline-form">
-            <input class="form-control" type="text" [(ngModel)]="roomName" placeholder="Name"/>
+            <div class="form-group">
+                <input class="form-control" type="text" [(ngModel)]="roomName" placeholder="Name"/>
+            </div>
             <button class="btn btn-primary" (click)="createRoom()" >Create {{roomName}}</button>
         </div>
     </div>
     <div class="col-md-4 col-md-offset-1">
         <h4>Join existing room</h4>
         <div class="inline-form">
-            <input class="form-control" type="text" [(ngModel)]="roomId" placeholder="Room ID"/>
+            <div class="form-group">
+                <input class="form-control" type="text" [(ngModel)]="roomId" placeholder="Room ID"/>
+            </div>
             <button class="btn btn-primary" (click)="createRoom()" >Join room</button>
         </div>
     </div>
