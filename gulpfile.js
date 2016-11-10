@@ -36,7 +36,7 @@ gulp.task("libs", () => {
         'node_modules/systemjs/dist/system.src.js',
         'node_modules/socket.io-client/socket.io.js'
     ])
-        .pipe(gulp.dest("bin/client/libs"));
+    .pipe(gulp.dest("bin/client/libs"));
 });
 
 

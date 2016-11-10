@@ -29,3 +29,5 @@
 5. NodeJS
 6. TsLint
 7. MongoDB
+8. Sass
+9. Bootstrap

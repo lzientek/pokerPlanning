@@ -13,10 +13,10 @@ h3 {
     min-width: 120px;
     background-color: orangered;
     border-radius: 2px;
-}
-
-.module:hover {
-    background-color: darkred;
-    cursor: pointer;
-    color: white;
+    
+    &:hover {
+        background-color: darkred;
+        cursor: pointer;
+        color: white;
+    }
 }
