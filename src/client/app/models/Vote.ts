@@ -9,8 +9,9 @@ export default class Vote {
     waitingForOther: boolean;
     userIdWaiting: string[];
     peopleWhoVoted: {id: string, voteValue: number}[];
-
+    isConsensus: boolean;
     constructor(cardId: string = null) {
         this.cardId = cardId;
+        this.isConsensus = false;
     }
 }

@@ -13,8 +13,16 @@ const gulp = require("gulp"),
  * Copy all resources that are not TypeScript files into build directory. e.g. index.html, css, images
  */
 gulp.task("clientResources", () => {
-    return gulp.src(["src/client/**/*", "!**/*.ts", "!client/typings", "!client/typings/**", "!client/*.json"])
+    return gulp.src(["src/client/**/*", "!**/*.ts","!**/*.scss", "!client/typings", "!client/typings/**", "!client/*.json"])
         .pipe(gulp.dest("bin/client"));
+});
+
+var sass = require('gulp-sass');
+ 
+gulp.task('sass', function () {
+  return gulp.src('src/client/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('bin/client'));
 });
 
 /**
@@ -22,18 +30,17 @@ gulp.task("clientResources", () => {
  */
 gulp.task("libs", () => {
     return gulp.src([
-        'core-js/client/**',
-        'zone.js/dist/zone.js',
-        'reflect-metadata/Reflect.js',
-        'reflect-metadata/Reflect.js.map',
-        'systemjs/dist/system.src.js',
-        'socket.io-client/socket.io.js'
-    ], { cwd: "node_modules/**" }) /* Glob required here. */
+        'node_modules/core-js/client/shim.min.js',
+        'node_modules/zone.js/dist/zone.js',
+        'node_modules/reflect-metadata/Reflect.js',
+        'node_modules/systemjs/dist/system.src.js',
+        'node_modules/socket.io-client/socket.io.js'
+    ])
         .pipe(gulp.dest("bin/client/libs"));
 });
 
 
 gulp.task("copyclient", function (callback) {
-    runSequence('clientResources', 'libs', callback);
+    runSequence('clientResources','sass', 'libs', callback);
 });
 

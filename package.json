@@ -40,6 +40,7 @@
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
     "gulp-nodemon": "^2.2.1",
+    "gulp-sass": "^2.3.2",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-tslint": "^6.1.2",
     "gulp-typescript": "^3.0.1",

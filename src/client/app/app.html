@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse" role="navigation">
+<nav class="navbar" role="navigation">
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu-collapse">
 			<span class="sr-only">Toggle navigation</span>
@@ -8,13 +8,41 @@
 		</button>
 		<a class="navbar-brand" href="/">{{ title }}</a>
 	</div>
-	<div class="collapse navbar-collapse navbar-menu-collapse">
-		<ul class="nav navbar-nav navbar-right">
-			<li class="active"> <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-			<li class="active"><a routerLink="/heroes" routerLinkActive="active">Heroes</a></li>
-		</ul>
-	</div>
 </nav>
-<div class="container">
+<div class="container main">
 	<router-outlet></router-outlet>
 </div>
+
+
+<section class="footer">
+    <div class="container">
+        <div class="row">
+        	<div class="col-lg-4  col-md-4 col-sm-4">
+            	<div class="footer_dv">
+                	<h4>Follow me</h4>
+                	<ul>
+                        <li><a href="//facebook.com">Facebook</a></li>
+                        <li><a href="//twitter.com">Twitter</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4  col-md-4 col-sm-4">
+            	<div class="footer_dv">
+                	<h4>Me! ZIENTEK Lucas </h4>
+                	<ul>
+                    	<li><a href="mailto:lucas@zientek.fr">mail</a></li>
+                        <li><a href="//github.com/lzientek">Github</a></li>
+                        <li><a href="http://lucas.zientek.fr">Web site</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4  col-md-4 col-sm-4">
+            	<div class="footer_dv">
+                	<h4>Cgu</h4>
+                	<p>Boolshit</p>
+      			<p>lolilol<br>
+                </p></div>
+            </div>
+        </div>
+    </div>
+</section>

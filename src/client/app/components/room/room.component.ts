@@ -102,6 +102,9 @@ export class RoomComponent implements OnInit {
         this.vote.peopleWhoVoted = result.userVoted;
         this.vote.userIdWaiting = result.userIdWaiting;
         this.updateUserVoteState();
+        if (this.vote.userIdWaiting.length === 0) {
+            this.allUserHaveVote();
+        }
     }
 
     updateUserVoteState() {
@@ -110,6 +113,30 @@ export class RoomComponent implements OnInit {
         }
         for (let i = 0; i < this.vote.userIdWaiting.length; i++) {
             this.getUserById(this.vote.userIdWaiting[i]).hasVoted = false;
+        }
+    }
+
+    clearLocalVote() {
+        this.vote.actualVoteId = null;
+    }
+
+    private allUserHaveVote() {
+        const votes: {[id: string]: number} = {};
+        let count = 0;
+        for (let i = 0; i < this.vote.peopleWhoVoted.length; i++) {
+            if (!votes[this.vote.peopleWhoVoted[i].voteValue.toString()]) {
+                votes[this.vote.peopleWhoVoted[i].voteValue.toString()] = 1;
+            } else {
+                votes[this.vote.peopleWhoVoted[i].voteValue.toString()] += 1;
+            }
+            count++;
+        }
+
+        if (count === 1) {
+            this.vote.isConsensus = true;
+        }
+        else {
+            //display truc chelou
         }
     }
 
