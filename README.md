@@ -17,7 +17,6 @@
 ```
     npm install ts-node -g
     npm install typescript-node -g
-    npm install concurrently -g
     npm install gulp -g
 ```
 ## Dependencies

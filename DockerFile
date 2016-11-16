@@ -1,0 +1,20 @@
+FROM node:argon
+
+ENV PORT 80
+ENV NODE_ENV production
+ENV dbURI mongodb://mongo:27017/pokerPlannin
+
+RUN mkdir -p /usr/src/app/bin/
+WORKDIR /usr/src/app
+
+COPY package.json /usr/src/app/
+RUN npm install ts-node -g
+RUN npm install typescript-node -g
+RUN npm install gulp -g
+RUN npm install
+
+RUN make build
+
+EXPOSE 80
+
+CMD ["node" , "./bin/server/server.js"]

@@ -1,9 +1,10 @@
-/// <reference path="../../typings/index.d.ts" />
-import BaseRoutes from "./config/routes/Routes";
 import * as bodyParser from "body-parser";
 import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
+
+/// <reference path="../../typings/index.d.ts" />
+import BaseRoutes from "./config/routes/Routes";
 import SocketController from './controllers/SocketController';
 
 const port: number = process.env.PORT || 3000;
@@ -21,7 +22,6 @@ app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
 
 // for system.js to work. Can be removed if bundling.
 app.use(express.static(path.resolve(__dirname, '../client')));
-app.use(express.static(path.resolve(__dirname, '../../node_modules')));
 app.use(bodyParser.json());
 app.use('/api', new BaseRoutes().routes);
 
