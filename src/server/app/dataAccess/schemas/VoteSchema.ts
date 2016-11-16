@@ -11,7 +11,7 @@ class VoteSchema {
     static get schema () {
         const schema =  mongoose.Schema({
             voteValue: {
-                type: Number,
+                type: String,
                 required: true,
             },
             userId: {

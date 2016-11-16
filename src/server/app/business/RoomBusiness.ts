@@ -55,7 +55,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 for (let index = room.users.length - 1; index >= 0; index--) {
-                    if (room.users[index]._id === _userId) {
+                    if (room.users[index]._id.toString() === _userId) {
                         room.users.splice(index, 1);
                     }
                 }
@@ -80,7 +80,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                 callback(err, null);
             } else {
                 for (let index = res.users.length - 1; index > 0; index--) {
-                    if (res.cards[index]._id === item._id) {
+                    if (res.cards[index]._id.toString() === item._id) {
                         res.cards[index] = item;
                     }
                 }
@@ -100,7 +100,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         this._roomRepository.findById(_id, (error, val) => {
             if (error) { return callback(error, null); }
             for (let i = 0; i < val.votes.length; i++) {
-                if (val.votes[i]._id === _voteId) {
+                if (val.votes[i]._id.toString() === _voteId) {
                     val.votes[i].voteValue = item.voteValue;
                 }
             }
@@ -113,11 +113,8 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         let res = new VoteResult(null, null, null);
         if (!error && val) {
             const users: string[] = [];
-            const usersWhoVoted: { id: string, voteValue: number }[] = [];
-            const actualVote = val.votes.filter(vote =>
-            { 
-                return vote.cardId === item.cardId;
-            });
+            const usersWhoVoted: { id: string, voteValue: string }[] = [];
+            const actualVote = val.votes.filter(vote => { return vote.cardId === item.cardId; });
 
             for (let j = 0; j < val.users.length; j++) {
                 users.push(val.users[j]._id.toHexString());

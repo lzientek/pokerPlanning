@@ -1,7 +1,7 @@
 import mongoose = require("mongoose");
 
 interface VoteModel extends mongoose.Document {
-    voteValue: number;
+    voteValue: string;
     userId: string;
     cardId: string;
 };

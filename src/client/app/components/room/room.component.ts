@@ -27,6 +27,9 @@ export class RoomComponent implements OnInit {
     vote: Vote = new Vote();
     cardTitle: string;
 
+    cardsValues: string[] =
+        ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
+
     constructor(
         private route: ActivatedRoute,
         private cardService: CardService,
@@ -84,11 +87,10 @@ export class RoomComponent implements OnInit {
         this.cardService.addCard(this.room._id, card);
     }
 
-    selectVoteValue(value: number) {
-        if (this.vote.actualVote) {
-            this.cardService.updateVote(this.room._id, this.vote.cardId, this.vote.actualVoteId, value);
-        }
-        this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
+    selectVoteValue(value: string) {
+        console.log(this.vote);
+        if (this.vote.actualVoteId) {
+            this.cardService.updateVote(this.room._id, this.vote.cardId, this.vote.actualVoteId, value)
             .then(result => {
                 this.vote.actualVote = value;
                 this.vote.peopleWhoVoted = result.userVoted;
@@ -96,6 +98,16 @@ export class RoomComponent implements OnInit {
                 this.vote.actualVoteId = result.id;
                 this.updateUserVoteState();
             }).catch(err => console.error('vote error:', err));
+        } else {
+            this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
+            .then(result => {
+                this.vote.actualVote = value;
+                this.vote.peopleWhoVoted = result.userVoted;
+                this.vote.userIdWaiting = result.userIdWaiting;
+                this.vote.actualVoteId = result.id;
+                this.updateUserVoteState();
+            }).catch(err => console.error('vote error:', err));
+        }
     }
 
     newVote(result: any) {
@@ -117,7 +129,7 @@ export class RoomComponent implements OnInit {
     }
 
     clearLocalVote() {
-        this.vote.actualVoteId = null;
+        this.vote.actualVote = null;
     }
 
     private allUserHaveVote() {

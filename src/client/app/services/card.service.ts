@@ -2,11 +2,12 @@
  * Created by Lzientek on 28-10-2016
  */
 
-import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/toPromise';
 
 import { Headers, Http } from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+
 import { Card } from "../models/Card";
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class CardService {
@@ -37,7 +38,7 @@ export class CardService {
             .catch(this.handleError);
     }
 
-    addVote(id: string, cardId: string, userId: string, voteValue: number) {
+    addVote(id: string, cardId: string, userId: string, voteValue: string) {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -49,12 +50,12 @@ export class CardService {
             .catch(this.handleError);
     }
 
-    updateVote(id: string, cardId: string, voteId: string, voteValue: number) {
+    updateVote(id: string, cardId: string, voteId: string, voteValue: string) {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
         return this.http
-            .post(`${this.roomsUrl}/${id}/cards/${cardId}/votes/${voteId}`
+            .put(`${this.roomsUrl}/${id}/cards/${cardId}/votes/${voteId}`
             , JSON.stringify({ voteValue }), { headers: headers })
             .toPromise()
             .then(response => response.json())

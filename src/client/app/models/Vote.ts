@@ -4,7 +4,7 @@
 
 export default class Vote {
     cardId: string;
-    actualVote: number;
+    actualVote: string;
     actualVoteId: string;
     waitingForOther: boolean;
     userIdWaiting: string[];

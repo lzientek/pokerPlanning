@@ -4,7 +4,7 @@
 
 class VoteResult {
     constructor (public userIdWaiting: string[],
-                public userVoted: {id: string, voteValue: number}[],
+                public userVoted: {id: string, voteValue: string}[],
                 public id: string) {
     }
 
