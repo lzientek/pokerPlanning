@@ -22,6 +22,7 @@ app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
 
 // for system.js to work. Can be removed if bundling.
 app.use(express.static(path.resolve(__dirname, '../client')));
+app.use(express.static(path.resolve(__dirname, '../../node_modules')));
 app.use(bodyParser.json());
 app.use('/api', new BaseRoutes().routes);
 
