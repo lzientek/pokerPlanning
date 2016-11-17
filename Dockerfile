@@ -1,5 +1,5 @@
 FROM node:argon
-MAINTAINER lzientek
+MAINTAINER lzientek <lucas@zientek.fr>
 
 ENV PORT 80
 ENV NODE_ENV production
