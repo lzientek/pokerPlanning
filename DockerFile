@@ -15,7 +15,7 @@ COPY typings.json /app/
 
 COPY src /app/src
 
-RUN npm install typescript -g
+RUN npm install typescript -g lol
 RUN npm install typings -g
 RUN npm install gulp -g
 RUN npm install
