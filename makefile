@@ -2,6 +2,7 @@
 install:
 	@echo "install npm packages"
 	@npm install
+	@typings install
 
 copy-frontend-dependencies:
 	@echo "copy dependencies"

@@ -1,9 +1,9 @@
+/// <reference path="../../typings/index.d.ts" />
 import * as bodyParser from "body-parser";
 import * as express from 'express';
 import * as http from 'http';
 import * as path from 'path';
 
-/// <reference path="../../typings/index.d.ts" />
 import BaseRoutes from "./config/routes/Routes";
 import SocketController from './controllers/SocketController';
 

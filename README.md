@@ -15,9 +15,11 @@
 
 ## Global packages requierement
 ```
-    npm install ts-node -g
-    npm install typescript-node -g
-    npm install gulp -g
+npm install typescript -g
+npm install typings -g
+npm install gulp -g
+
+
 ```
 ## Dependencies
 

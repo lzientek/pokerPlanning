@@ -2,16 +2,33 @@ FROM node:argon
 
 ENV PORT 80
 ENV NODE_ENV production
-ENV dbURI mongodb://mongo:27017/pokerPlannin
+ENV dbURI mongodb://mongo:27017/pokerPlanning
 
-RUN mkdir -p /usr/src/app/bin/
-WORKDIR /usr/src/app
+RUN mkdir -p /app/bin/
+WORKDIR /app/
 
-COPY package.json /usr/src/app/
-RUN npm install ts-node -g
-RUN npm install typescript-node -g
+COPY package.json /app/
+COPY makefile /app/
+COPY gulpfile.js /app/
+COPY tsconfig.json /app/
+COPY typings.json /app/
+
+COPY src /app/src
+
+RUN npm install typescript -g
+RUN npm install typings -g
 RUN npm install gulp -g
 RUN npm install
+
+RUN npm install gulp
+RUN npm install gulp-sass
+RUN npm install @types/core-js
+RUN npm install run-sequence
+
+RUN typings install
+
+COPY typings/index.d.ts /app/typings/
+COPY typings/manual /app/typings/manual
 
 RUN make build
 
