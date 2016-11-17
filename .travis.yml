@@ -1,6 +1,6 @@
 sudo: required
 
-language: typescript
+language: node_js
 
 services:  
     - docker
