@@ -1,4 +1,4 @@
-## Poker planning cards
+## Poker planning cards [![Build Status](https://travis-ci.org/lzientek/pockerPlanning.svg?branch=master)](https://travis-ci.org/lzientek/pockerPlanning)
 # Angular2 MEAN - QuickStart application with ExpressJS, MongoDB, Gulp and Typescript (Repository Pattern)
 
 ## Prerequisites

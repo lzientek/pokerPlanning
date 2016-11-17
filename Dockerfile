@@ -18,7 +18,7 @@ COPY src /app/src
 COPY typings/index.d.ts /app/typings/
 COPY typings/manual /app/typings/manual
 
-
+RUN npm config set loglevel warn
 RUN npm install typescript -g
 RUN npm install typings -g
 RUN npm install gulp -g
