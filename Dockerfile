@@ -32,5 +32,4 @@ RUN typings install
 RUN make build
 
 EXPOSE 80
-
 CMD ["node", "/app/bin/server/server.js"]
