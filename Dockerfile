@@ -1,5 +1,5 @@
 FROM node:argon
-MAINTAINER lzientek
+MAINTAINER lzientek <lucas@zientek.fr>
 
 ENV PORT 80
 ENV NODE_ENV production
@@ -32,5 +32,4 @@ RUN typings install
 RUN make build
 
 EXPOSE 80
-
 CMD ["node", "/app/bin/server/server.js"]
