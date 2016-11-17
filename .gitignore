@@ -1,6 +1,5 @@
 build/**
 typings/globals/**
-typings/index.d.ts
 bin/**
 node_modules/**
 *.log
