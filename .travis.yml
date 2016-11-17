@@ -1,0 +1,11 @@
+sudo: required
+
+language: typescript
+
+services:  
+    - docker
+
+script:  
+    - docker-compose -p planningPoker build
+notifications:
+  email: true
