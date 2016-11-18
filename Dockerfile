@@ -18,15 +18,14 @@ COPY src /app/src
 COPY typings/index.d.ts /app/typings/
 COPY typings/manual /app/typings/manual
 
-RUN npm config set loglevel warn
-RUN npm install typescript -g
-RUN npm install typings -g
-RUN npm install gulp -g
-RUN npm install
-RUN npm install gulp
-RUN npm install gulp-sass
-RUN npm install @types/core-js
-RUN npm install run-sequence
+RUN npm install typescript -g --silent
+RUN npm install typings -g --silent
+RUN npm install gulp -g --silent
+RUN npm install --silent
+RUN npm install gulp --silent
+RUN npm install gulp-sass --silent
+RUN npm install @types/core-js --silent
+RUN npm install run-sequence --silent
 
 RUN typings install
 RUN make build
