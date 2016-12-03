@@ -18,6 +18,11 @@ class UserSchema {
                 default: false,
                 required: true
             },
+            isActive: {
+                type: Boolean,
+                default: true,
+                required: true,
+            }
         });
 
         return schema;

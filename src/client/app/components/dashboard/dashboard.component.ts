@@ -35,6 +35,6 @@ export class DashboardComponent {
     }
 
     joinRoom() {
-
+        this.router.navigateByUrl(`/join/${this.roomId}`);
     }
 }

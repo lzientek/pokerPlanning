@@ -19,8 +19,11 @@ export default class SocketController {
     }
 
     private connectionHandler(socket: SocketIO.Socket) {
-        socket.on('join_room', (values) => {
+        socket.on('join_room', (values: {roomId: string, userId: string}) => {
             SocketController._instance.joinRoom(socket, values);
+            const roomBusiness = new RoomBusiness();
+            roomBusiness.reactiveUser(values.roomId, values.userId, err => console.error(err));
+            SocketController._instance.activateUser(values.roomId, values.userId);
             socket.on('disconnect',
                 () => SocketController._instance.disconnectFromRoom(values.roomId, values.userId));
         });
@@ -38,6 +41,10 @@ export default class SocketController {
 
     public addUser(roomId: string, user: UserModel) {
         this.io.to(roomId).emit('new_user', user);
+    }
+
+    public activateUser(roomId: string, userId: string) {
+        this.io.to(roomId).emit('activate_user', userId);
     }
 
     public upsertCard(roomId: string, card: CardModel) {

@@ -6,5 +6,6 @@ export class User {
     _id: string;
     name: string;
     isSpectator: boolean;
+    isActive: boolean;
     hasVoted: boolean;
 }

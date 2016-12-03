@@ -56,7 +56,22 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
             } else {
                 for (let index = room.users.length - 1; index >= 0; index--) {
                     if (room.users[index]._id.toString() === _userId) {
-                        room.users.splice(index, 1);
+                        room.users[index].isActive = false;
+                    }
+                }
+                this._roomRepository.update(room._id, room, error => callback(error, room));
+            }
+        });
+    }
+
+    reactiveUser (_id: string, _userId: string, callback: (error: any, result: any) => void) {
+        this._roomRepository.findById(_id, (err, room) => {
+            if (err) {
+                callback(err, null);
+            } else {
+                for (let index = room.users.length - 1; index >= 0; index--) {
+                    if (room.users[index]._id.toString() === _userId) {
+                        room.users[index].isActive = true;
                     }
                 }
                 this._roomRepository.update(room._id, room, error => callback(error, room));
@@ -117,7 +132,9 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
             const actualVote = val.votes.filter(vote => { return vote.cardId === item.cardId; });
 
             for (let j = 0; j < val.users.length; j++) {
-                users.push(val.users[j]._id.toHexString());
+                if (val.users[j].isActive && !val.users[j].isSpectator) {
+                    users.push(val.users[j]._id.toHexString());
+                }
             }
             for (let i = 0; i < actualVote.length; i++) {
                 usersWhoVoted.push({ id: actualVote[i].userId, voteValue: actualVote[i].voteValue });

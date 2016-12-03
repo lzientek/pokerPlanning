@@ -4,7 +4,7 @@
     <div class="row" *ngIf="vote.cardId != null">
         <div class="col-md-8">
             <div *ngIf="!vote.actualVote" >
-                <div *ngFor="let val of cardsValues" class="col-md-3" >
+                <div *ngFor="let val of cardsValues" class="col-md-2 col-xs-3" >
                     <button class="btn btn-default btn-block"  (click)="selectVoteValue(val)" >{{val}}</button>
                 </div>
             </div>
@@ -20,7 +20,8 @@
                     {{user.name}}
                     <span *ngIf="user.hasVoted"> Ok </span> 
                     <span *ngIf="user.isVisitor"> Visitor </span> 
-                    <span *ngIf="!user.hasVoted"> Waiting </span> 
+                    <span *ngIf="!user.hasVoted && !user.isVisitor"> Waiting </span> 
+                    <span style="color:red;" *ngIf="!user.isActive"> (Disconnected) </span> 
                 </li>
             </ul>
         </div>

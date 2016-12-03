@@ -7,6 +7,7 @@ import mongoose = require("mongoose");
 interface UserModel extends mongoose.Document {
     name: string;
     isSpectator: boolean;
+    isActive: boolean;
 }
 
 export = UserModel;

@@ -41,10 +41,11 @@ export class RoomComponent implements OnInit {
         this.socket = io();
         this.route.params.forEach((params: Params) => {
             const roomId = params['id'];
-            this.socket.emit('join_room', { roomId: roomId });
+            this.socket.emit('join_room', { roomId: roomId, userId: this.userId });
             this.socket.on('upsert_card', this.upsertCard.bind(this));
             this.socket.on('new_vote', this.newVote.bind(this));
             this.socket.on('new_user', this.newUser.bind(this));
+            this.socket.on('activate_user', this.activateUser.bind(this));
             this.socket.on('user_disconnect', this.removeUser.bind(this));
             this.roomService.getRoom(roomId)
                 .then((room: Room) => {
@@ -141,7 +142,14 @@ export class RoomComponent implements OnInit {
     private removeUser(userId: string) {
         const indexToRemove  = this.room.users.findIndex(u => u._id === userId);
         if (indexToRemove >= 0) {
-            this.room.users.splice(indexToRemove, 1);
+            this.room.users[indexToRemove].isActive = false;
+        }
+    }
+
+    private activateUser(userId: string) {
+        const indexToRemove  = this.room.users.findIndex(u => u._id === userId);
+        if (indexToRemove >= 0) {
+            this.room.users[indexToRemove].isActive = true;
         }
     }
 
@@ -159,9 +167,8 @@ export class RoomComponent implements OnInit {
 
         if (count === 1) {
             this.vote.isConsensus = true;
-        }
-        else {
-            //display truc chelou
+        } else {
+            console.log("votes", votes);
         }
     }
 
