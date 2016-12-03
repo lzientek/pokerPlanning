@@ -2,6 +2,7 @@ import * as socketio from 'socket.io';
 import CardModel = require('../app/model/CardModel');
 import UserModel = require('../app/model/UserModel');
 import VoteResult = require('../app/model/VoteResult');
+import RoomBusiness = require('../app/business/RoomBusiness');
 
 export default class SocketController {
     io: SocketIO.Server;
@@ -31,6 +32,8 @@ export default class SocketController {
 
     public disconnectFromRoom(roomId: string, userId: string) {
         this.io.to(roomId).emit('user_disconnect', userId);
+        const roomBusiness = new RoomBusiness();
+        roomBusiness.removeUser(roomId, userId, err => console.error(err));
     }
 
     public addUser(roomId: string, user: UserModel) {

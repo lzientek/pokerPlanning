@@ -44,6 +44,8 @@ export class RoomComponent implements OnInit {
             this.socket.emit('join_room', { roomId: roomId });
             this.socket.on('upsert_card', this.upsertCard.bind(this));
             this.socket.on('new_vote', this.newVote.bind(this));
+            this.socket.on('new_user', this.newUser.bind(this));
+            this.socket.on('user_disconnect', this.removeUser.bind(this));
             this.roomService.getRoom(roomId)
                 .then((room: Room) => {
                     if (room.cards && room.cards.length > 0) {
@@ -130,6 +132,17 @@ export class RoomComponent implements OnInit {
 
     clearLocalVote() {
         this.vote.actualVote = null;
+    }
+
+    private newUser(user: User) {
+        this.room.users.push(user);
+    }
+
+    private removeUser(userId: string) {
+        const indexToRemove  = this.room.users.findIndex(u => u._id === userId);
+        if (indexToRemove >= 0) {
+            this.room.users.splice(indexToRemove, 1);
+        }
     }
 
     private allUserHaveVote() {

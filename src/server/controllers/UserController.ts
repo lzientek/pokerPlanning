@@ -10,16 +10,16 @@ import SocketController from './SocketController';
 class UserController {
     addUser(req: express.Request, res: express.Response): void {
         try {
-            const _id: string = req.params._id;
+            const _roomId: string = req.params._id;
 
             const user: IUserModel = <IUserModel> req.body;
             const roomBusiness = new RoomBusiness();
-            roomBusiness.addUser(_id, user, (error, result) => {
+            roomBusiness.addUser(_roomId, user, (error, result) => {
                 if (error) {
                     res.send({"error": "error"});
                 } else {
                     res.send(result);
-                    SocketController.getInstance().addUser(_id, result);
+                    SocketController.getInstance().addUser(_roomId, result);
                 }
             });
         } catch (e)  {
