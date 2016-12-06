@@ -129,14 +129,16 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         if (!error && val) {
             const users: string[] = [];
             const usersWhoVoted: { id: string, voteValue: string }[] = [];
-            const actualVote = val.votes.filter(vote => { return vote.cardId === item.cardId; });
 
             for (let j = 0; j < val.users.length; j++) {
                 if (val.users[j].isActive && !val.users[j].isSpectator) {
                     users.push(val.users[j]._id.toHexString());
                 }
             }
-            for (let i = 0; i < actualVote.length; i++) {
+            const actualVote = val.votes.filter(
+                vote => { return vote.cardId === item.cardId && users.indexOf(vote.userId) >= 0; });
+
+            for (let i = actualVote.length - 1; i >= 0 ; i--) {
                 usersWhoVoted.push({ id: actualVote[i].userId, voteValue: actualVote[i].voteValue });
                 const index = users.indexOf(actualVote[i].userId);
                 if (index >= 0) {
