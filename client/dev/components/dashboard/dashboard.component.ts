@@ -9,8 +9,8 @@ import { RoomService } from "../../services/room.service";
 import Room from '../../models/Room';
 @Component({
     selector: 'my-dashboard',
-    templateUrl: './app/components/dashboard/dashboard.component.html',
-    styleUrls: ['./app/components/dashboard/dashboard.component.css']
+    templateUrl: './components/dashboard/dashboard.component.html',
+    styleUrls: ['./components/dashboard/dashboard.component.css']
 })
 
 export class DashboardComponent {

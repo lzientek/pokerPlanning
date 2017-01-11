@@ -13,7 +13,7 @@ import { User } from '../../models/User';
 
 @Component({
     selector: 'my-join-room',
-    templateUrl: './app/components/room/joinRoom.component.html'
+    templateUrl: './components/room/joinRoom.component.html'
 })
 
 export class JoinRoomComponent extends OnInit {

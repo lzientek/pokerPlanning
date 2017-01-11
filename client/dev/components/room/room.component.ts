@@ -16,8 +16,8 @@ import Vote from '../../models/Vote';
 
 @Component({
     selector: 'my-rooms',
-    templateUrl: './app/components/room/room.component.html',
-    styleUrls: ['./app/components/dashboard/dashboard.component.css']
+    templateUrl: './components/room/room.component.html',
+    styleUrls: ['./components/dashboard/dashboard.component.css']
 })
 
 export class RoomComponent implements OnInit {
