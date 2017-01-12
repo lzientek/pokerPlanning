@@ -6,7 +6,7 @@ var path = co.path, tasks= co.tasks;
 var TS_CONFIG = path.ROOT + 'tsconfig.json';
 
 gulp.task(tasks.CLIENT_BUILD_TS, function() {
-  let _tsProject = tsc.createProject(TS_CONFIG);
+  var _tsProject = tsc.createProject(TS_CONFIG);
 
   return _tsProject.src()
                    .pipe(_tsProject())
