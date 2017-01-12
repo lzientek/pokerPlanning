@@ -167,6 +167,7 @@ export class RoomComponent implements OnInit {
 
         if (count === 1) {
             this.vote.isConsensus = true;
+            this.room.cards[this.room.cards.length - 1].evaluation = parseInt(this.vote.actualVote, 10);
         } else {
             console.log("votes", votes);
         }

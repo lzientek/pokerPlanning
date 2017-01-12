@@ -10,7 +10,7 @@ import Room from '../../models/Room';
 @Component({
     selector: 'my-dashboard',
     templateUrl: './components/dashboard/dashboard.component.html',
-    styleUrls: ['./components/dashboard/dashboard.component.css']
+    styleUrls: ['./styles/dashboard/dashboard.component.css']
 })
 
 export class DashboardComponent {
