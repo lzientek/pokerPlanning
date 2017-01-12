@@ -5,30 +5,24 @@ ENV PORT 80
 ENV NODE_ENV production
 ENV dbURI mongodb://mongo:27017/pokerPlanning
 
-RUN mkdir -p /app/bin/
+RUN mkdir -p /app/
 WORKDIR /app/
 
 COPY package.json \
-     makefile \
+     index.js \
      gulpfile.js \
      tsconfig.json \
      typings.json  /app/
 
-COPY src /app/src
+COPY client /app/client
+COPY server /app/server
+COPY tasks /app/tasks
 COPY typings/index.d.ts /app/typings/
-COPY typings/manual /app/typings/manual
 
-RUN npm install typescript -g --silent
-RUN npm install typings -g --silent
-RUN npm install gulp -g --silent
+RUN npm install typescript typings gulp -g --silent
+RUN npm install gulp gulp-concat gulp-typescript gulp-clean-css gulp-rename gulp-sass gulp-rev-append gulp-uglify gulp-htmlmin gulp-imagemin gulp-util run-sequence concurrently aliv del require-dir browser-sync --silent
 RUN npm install --silent
-RUN npm install gulp --silent
-RUN npm install gulp-sass --silent
-RUN npm install @types/core-js --silent
-RUN npm install run-sequence --silent
-
-RUN typings install
-RUN make build
+RUN npm run build-dist
 
 EXPOSE 80
-CMD ["node", "/app/bin/server/server.js"]
+CMD ["node", "./index.js"]

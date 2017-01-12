@@ -17,17 +17,16 @@ const server = http.createServer(app);
 new SocketController(server);
 app.set('port', port);
 
-app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
-app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
+const _clientFiles = '..' + ( (env === 'production') ? '/client/dist/' : '/client/dev/');
 
-// for system.js to work. Can be removed if bundling.
-app.use(express.static(path.resolve(__dirname, '../client')));
-app.use(express.static(path.resolve(__dirname, '../../node_modules')));
+
+app.use(express.static(path.resolve(__dirname, _clientFiles)));
+app.use(express.static(path.resolve(__dirname, '../node_modules')));
 app.use(bodyParser.json());
 app.use('/api', new BaseRoutes().routes);
 
 let renderIndex = (req: express.Request, res: express.Response) => {
-    res.sendFile(path.resolve(__dirname, '../client/index.html'));
+    res.sendFile(path.resolve(__dirname, _clientFiles + 'index.html'));
 };
 
 app.get('/*', renderIndex);
@@ -63,5 +62,5 @@ export { app, server };
 server.listen(app.get('port'), function(){
     let host = server.address().address;
     let port = server.address().port;
-    console.log('This express angular app is listening on port:' + port);
+    console.log('This express angular app is listening on port:' + port, 'Environement:' + env, 'files:' + _clientFiles);
 });

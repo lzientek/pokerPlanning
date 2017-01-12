@@ -1,0 +1,16 @@
+.navbar {
+  background: #26C281;
+  border-radius: 0; }
+  .navbar .navbar-brand {
+    color: #ffffff; }
+
+.main {
+  min-height: 65%; }
+
+.footer {
+  background: #FFFFFF;
+  border-top: 3px #00B16A solid;
+  margin-top: 50px;
+  padding-top: 8px; }
+  .footer h4 {
+    color: #00B16A; }

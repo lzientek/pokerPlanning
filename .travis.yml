@@ -1,10 +1,7 @@
 sudo: required
 
-language: node_js
-
 services:  
     - docker
-
 script:  
     - docker-compose -p planningPoker build
 notifications:

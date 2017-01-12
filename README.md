@@ -42,9 +42,8 @@ docker rmi pokerplanning mongo:3.4
 
 ## Steps to Run
 ```sh
-    make install //run only once install npm package
-    make build
-    make run
+npm install
+npm run dev
 ```
 
 ## Global packages requierement
@@ -52,7 +51,6 @@ docker rmi pokerplanning mongo:3.4
 npm install typescript -g
 npm install typings -g
 npm install gulp -g
-
 
 ```
 ## Dependencies

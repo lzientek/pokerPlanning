@@ -1,4 +1,15 @@
 // Placez vos paramètres dans ce fichier pour remplacer les paramètres par défaut et les paramètres utilisateur.
 {
-    "typescript.tsdk": "./node_modules/typescript/lib"
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "node_modules/**": true,
+    "server/**/*.js": true,
+    "server/**/*.js.map": true,
+    "client/**/*.js": true,
+    "client/**/*.js.map": true
+  }
 }

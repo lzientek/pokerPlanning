@@ -1,7 +1,7 @@
 {
-  "name": "poker-planninge",
+  "name": "poker-planning",
   "version": "0.0.1",
-  "main": "src/poker-planninge.js",
+  "main": "index.js",
   "scripts": {
     "preinstall": "typings install",
     "postinstall": "tsc",
@@ -36,7 +36,7 @@
     "rxjs": "^5.0.0-beta.12",
     "systemjs": "^0.19.24",
     "typescript": "^2.0.2",
-    "zone.js": "^0.6.23", 
+    "zone.js": "^0.7.2", 
     "helmet": "^2.1.1",
     "socket.io": "^1.5.0",
     "socket.io-client": "^1.5.0"
@@ -62,14 +62,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/lzientek/poker-planning.git"
+    "url": "https://github.com/lzientek/pockerPlanning.git"
   },
   "author": "lzientek",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/lzientek/poker-planning/issues"
+    "url": "https://github.com/lzientek/pockerPlanning/issues"
   },
-  "homepage": "https://github.com/lzientek/poker-planning",
+  "homepage": "https://github.com/lzientek/pockerPlanning",
   "engines": {
     "node": "stable"
   }
