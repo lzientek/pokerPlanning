@@ -7,9 +7,11 @@
     "**/.hg": true,
     "**/.DS_Store": true,
     "node_modules/**": true,
+    "typings/**": true,
     "server/**/*.js": true,
     "server/**/*.js.map": true,
     "client/**/*.js": true,
-    "client/**/*.js.map": true
+    "client/**/*.js.map": true,
+    "client/dev/styles/**/*.css": true
   }
 }
