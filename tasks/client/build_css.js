@@ -7,7 +7,7 @@ var path = co.path, tasks= co.tasks;
 var CSS = path.DIST + '**/*.css';
  
 gulp.task(tasks.CLIENT_BUILD_SASS, function () {
-  return gulp.src(path.DEV +'**/*.scss', {base: path.DEV})
+  return gulp.src(path.DEV +'**/*.scss', {base: path.ROOT})
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('.'));
 });

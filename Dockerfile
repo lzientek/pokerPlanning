@@ -21,7 +21,8 @@ COPY typings/index.d.ts /app/typings/
 
 RUN npm install typescript typings gulp -g --silent
 RUN npm install gulp gulp-concat gulp-typescript gulp-clean-css gulp-rename gulp-sass gulp-rev-append gulp-uglify gulp-htmlmin gulp-imagemin gulp-util run-sequence concurrently aliv del require-dir browser-sync --silent
+RUN npm install --silent
 RUN npm run build-dist
 
 EXPOSE 80
-CMD ["node", "/index.js"]
+CMD ["node", "./index.js"]
