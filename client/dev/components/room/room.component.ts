@@ -5,7 +5,7 @@
 declare var io: any;
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, QueryList } from '@angular/core';
 
 import { Card } from "../../models/Card";
 import { CardService } from "../../services/card.service";
@@ -13,11 +13,12 @@ import Room from "../../models/Room";
 import { RoomService } from "../../services/room.service";
 import { User } from"../../models/User";
 import Vote from '../../models/Vote';
+import { ModalComponent } from '../global/modal.component';
 
 @Component({
     selector: 'my-rooms',
     templateUrl: './components/room/room.component.html',
-    styleUrls: ['./components/dashboard/dashboard.component.css']
+    styleUrls: ['./styles/room/room.component.css']
 })
 
 export class RoomComponent implements OnInit {
@@ -26,6 +27,7 @@ export class RoomComponent implements OnInit {
     userId: string;
     vote: Vote = new Vote();
     cardTitle: string;
+    @ViewChild("newCardModal") newCardModal: ModalComponent;
 
     cardsValues: string[] =
         ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
@@ -67,13 +69,6 @@ export class RoomComponent implements OnInit {
         this.newCard(card);
     }
 
-    private newCard(card: Card) {
-        this.room.cards.push(card);
-        this.vote = new Vote(card._id);
-        for (let j = 0; j < this.room.users.length; j++) {
-            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : false ;
-        }
-    }
 
     getCardById(id: string): Card {
         const filterResult = this.room.cards.filter(card => card._id === id);
@@ -113,6 +108,10 @@ export class RoomComponent implements OnInit {
         }
     }
 
+    openCardModalModal() {
+        this.newCardModal.showModal();
+    }
+
     newVote(result: any) {
         this.vote.peopleWhoVoted = result.userVoted;
         this.vote.userIdWaiting = result.userIdWaiting;
@@ -133,6 +132,16 @@ export class RoomComponent implements OnInit {
 
     clearLocalVote() {
         this.vote.actualVote = null;
+    }
+
+    //private methods:
+
+    private newCard(card: Card) {
+        this.room.cards.push(card);
+        this.vote = new Vote(card._id);
+        for (let j = 0; j < this.room.users.length; j++) {
+            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : false ;
+        }
     }
 
     private newUser(user: User) {

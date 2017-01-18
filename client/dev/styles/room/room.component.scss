@@ -1,0 +1,28 @@
+@import '../common/global';
+
+.votes{
+    border-right: 3px solid $brand-primary;
+    padding-right: 60px;
+    &-btn {
+        margin-bottom: 10px;
+        .btn {
+            padding: 5px;
+            font-size: 16px;
+            font-weight: normal;
+            text-transform: none;
+        }
+    }
+
+    &-ncard {
+        padding-top: 40px;
+        padding-bottom: 20px;
+        button{
+            font-size: 16px;
+            font-weight: normal;
+            text-transform: none;
+        }
+    }
+    h3{
+        padding-bottom: 20px;
+    }
+}

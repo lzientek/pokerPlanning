@@ -1,44 +1,54 @@
 <div class="row">
     <h2>{{room.name}}</h2>
-    
-    <div class="row" *ngIf="vote.cardId != null">
-        <div class="col-md-8">
-            <div *ngIf="!vote.actualVote" >
-                <div *ngFor="let val of cardsValues" class="col-md-2 col-xs-3" >
-                    <button class="btn btn-default btn-block"  (click)="selectVoteValue(val)" >{{val}}</button>
+    <div class="col-md-12">
+        <div class="col-md-8 votes">
+            <h3>Actual card: {{getCardById(vote.cardId).title}}</h3>
+            <div class="votes-content row">
+                <div *ngIf="!vote.actualVote">
+                    <div *ngFor="let val of cardsValues" class="col-md-3 col-xs-3 votes-btn">
+                        <button class="btn btn-success btn-block" (click)="selectVoteValue(val)">{{val}}</button>
+                    </div>
+                </div>
+                <div *ngIf="vote.actualVote">
+                    <h1>{{vote.actualVote}}</h1>
+                    <p><button (click)="clearLocalVote()">Change vote</button></p>
                 </div>
             </div>
-            <div *ngIf="vote.actualVote" >
-                <h1>{{vote.actualVote}}</h1>
-                <p><button (click)="clearLocalVote()" >Change vote</button></p>
-            </div>         
+            <div class="row votes-ncard">
+                <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new card</button>
+               
+                <my-modal #newCardModal [title]="'Estimate new card'" [saveText]="'Create a new card'" (onSaved)="createCard()">
+                    <div>
+                        <h3>Create a new card</h3>
+                        <div class="form-group">
+                            <input class="form-control" type="text" placeholder="card title" [(ngModel)]="cardTitle" />
+                        </div>
+                    </div>
+                </my-modal>
+            </div>
         </div>
         <div class="col-md-4">
-            <h4>{{getCardById(vote.cardId).title}}</h4>
+            <h3>Users</h3>
             <ul>
                 <li *ngFor="let user of room.users" class="col-md-3">
                     {{user.name}}
-                    <span *ngIf="user.hasVoted"> Ok </span> 
-                    <span *ngIf="user.isVisitor"> Visitor </span> 
-                    <span *ngIf="!user.hasVoted && !user.isVisitor"> Waiting </span> 
-                    <span style="color:red;" *ngIf="!user.isActive"> (Disconnected) </span> 
+                    <span *ngIf="user.hasVoted"> Ok </span>
+                    <span *ngIf="user.isVisitor"> Visitor </span>
+                    <span *ngIf="!user.hasVoted && !user.isVisitor"> Waiting </span>
+                    <span class="text-error" *ngIf="!user.isActive"> (Disconnected) </span>
                 </li>
             </ul>
         </div>
     </div>
+    <div class="col-md-12">
+        <h2>History <button class="btn btn-xs btn-warning">Export</button></h2>
+        <div *ngFor="let card of room.cards" class="col-md-3">
+            <h4>{{card.title}}</h4>
+            <p>evaluation : {{card.evaluation}}</p>
+        </div>
+    </div>
+    <!--
     <div *ngIf="vote.isConsensus" class="col-md-12">
         Consensus!
-    </div>
-    <div class="col-md-12">
-        <div class="form-group col-md-5">
-            <input class="form-control" type="text" placeholder="card title" [(ngModel)]="cardTitle" />
-        </div>
-        <button class="btn btn-primary" (click)="createCard()" >Estimate a new card</button>
-    </div>
-
-    <h3>cards</h3>
-    <div *ngFor="let card of room.cards" class="col-md-3">
-        <h4>{{card.title}}</h4>
-        <p>evaluation : {{card.evaluation}}</p>
-    </div>
+    </div>-->
 </div>
