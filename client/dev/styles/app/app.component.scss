@@ -1,7 +1,7 @@
 @import '../common/global';
 
 .navbar {
-    background: $site_color;
+    background: $brand-primary;
     border-radius: 0;
     .navbar-brand {
         color: #ffffff;
@@ -14,11 +14,8 @@
 
 .footer {
     background: #FFFFFF;
-    border-top: 3px $site_color_dark solid;
+    border-top: 3px $brand-primary;
     margin-top: 50px;
     padding-top: 8px;
-
-    h4 {
-        color: $site_color_dark;
-    }
 }
+

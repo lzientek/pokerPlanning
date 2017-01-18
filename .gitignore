@@ -8,6 +8,7 @@ build/**
 typings/globals/**
 client/**/*.js
 !client/**/config.js
+client/**/*.css
 client/**/*.js.map
 server/**/*.js
 server/**/*.js.map
