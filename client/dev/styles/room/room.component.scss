@@ -26,3 +26,21 @@
         padding-bottom: 20px;
     }
 }
+
+.users {
+    h3{
+        padding-bottom: 20px;
+    }
+
+    &-list {
+        list-style: none;
+        padding-left: 10px;
+        &-item{
+            font-size: 12pt;
+            margin-bottom: 8px;
+        }
+    }
+}
+.padding-bottom-40{
+    padding-bottom: 40px;
+}

@@ -5,7 +5,7 @@
 declare var io: any;
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit, ViewChild, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Card } from "../../models/Card";
 import { CardService } from "../../services/card.service";
@@ -28,6 +28,7 @@ export class RoomComponent implements OnInit {
     vote: Vote = new Vote();
     cardTitle: string;
     @ViewChild("newCardModal") newCardModal: ModalComponent;
+    @ViewChild("consensusModal") consensusModal: ModalComponent;
 
     cardsValues: string[] =
         ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
@@ -177,6 +178,7 @@ export class RoomComponent implements OnInit {
         if (count === 1) {
             this.vote.isConsensus = true;
             this.room.cards[this.room.cards.length - 1].evaluation = parseInt(this.vote.actualVote, 10);
+            this.consensusModal.showModal();
         } else {
             console.log("votes", votes);
         }
