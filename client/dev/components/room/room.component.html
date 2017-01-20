@@ -47,7 +47,7 @@
             <p>evaluation : {{card.evaluation}}</p>
         </div>
     </div>
-    <my-modal #consensusModal [title]="Consensus" options="{display: {header:false,footer:false}}">
+    <my-modal #consensusModal [title]="Consensus" [options]="{display: {header:false,footer:false}}">
         <div class="padding-bottom-40">
             <h2>Consensus!</h2>
             <p>Bravo vous avez réussi! Carte évaluté à <strong>{{vote.actualVote}}</strong></p>
