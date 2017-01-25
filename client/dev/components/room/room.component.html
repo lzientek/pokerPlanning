@@ -1,5 +1,13 @@
 <div class="row">
-    <h2>{{room.name}}</h2>
+    <h2>{{room.name}}  <button class="btn btn-xs btn-warning" (click)="shareModal.showModal()" >Partager la room</button></h2>
+    <my-modal #shareModal [options]="{display: {header:true,footer:false}}" title="Partager">
+        <h3>Lien</h3>
+        <p>Partagé ce lien:</p>
+        <input type="text" class="form-control" value="{{shareUrl}}#/join/{{room._id}}" />
+        <h3>Par identifiant</h3>
+        <input type="text" class="form-control" value="{{room._id}}" />
+        
+    </my-modal>
     <div class="col-md-12">
         <div class="col-md-8 votes">
             <h3>Actual card: {{getCardById(vote.cardId).title}}</h3>
@@ -42,10 +50,8 @@
     </div>
     <div class="col-md-12">
         <h2>History <button class="btn btn-xs btn-warning">Export</button></h2>
-        <div *ngFor="let card of room.cards" class="col-md-3">
-            <h4>{{card.title}}</h4>
-            <p>evaluation : {{card.evaluation}}</p>
-        </div>
+        <my-history-card *ngFor="let card of room.cards" [card]="card" >
+        </my-history-card>
     </div>
     <my-modal #consensusModal [title]="Consensus" [options]="{display: {header:false,footer:false}}">
         <div class="padding-bottom-40">

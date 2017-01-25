@@ -27,8 +27,10 @@ export class RoomComponent implements OnInit {
     userId: string;
     vote: Vote = new Vote();
     cardTitle: string;
+    shareUrl: string = location.href.split('#')[0];
     @ViewChild("newCardModal") newCardModal: ModalComponent;
     @ViewChild("consensusModal") consensusModal: ModalComponent;
+    @ViewChild("shareModal") shareModal: ModalComponent;
 
     cardsValues: string[] =
         ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
