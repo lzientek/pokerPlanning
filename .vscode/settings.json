@@ -2,16 +2,16 @@
 {
   "typescript.tsdk": "./node_modules/typescript/lib",
   "files.exclude": {
-    "**/.git": true,
-    "**/.svn": true,
-    "**/.hg": true,
-    "**/.DS_Store": true,
-    "node_modules/**": true,
-    "typings/**": true,
-    "server/**/*.js": true,
-    "server/**/*.js.map": true,
-    "client/**/*.js": true,
-    "client/**/*.js.map": true,
-    "client/dev/styles/**/*.css": true
+    "**/.git": false,
+    "**/.svn": false,
+    "**/.hg": false,
+    "**/.DS_Store": false,
+    "node_modules/**": false,
+    "typings/**": false,
+    "server/**/*.js": false,
+    "server/**/*.js.map": false,
+    "client/**/*.js": false,
+    "client/**/*.js.map": false,
+    "client/dev/styles/**/*.css": false
   }
 }
