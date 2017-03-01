@@ -17,3 +17,4 @@ client/test/**
 node_modules/**
 *.log
 dist/**
+.vscode/settings.json
