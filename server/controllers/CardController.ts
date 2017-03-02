@@ -53,8 +53,7 @@ class CardController {
         const _id: string = req.params._id;
         const _cardId: string = req.params._cardId;
         const vote: IVoteModel = <IVoteModel> req.body;
-        vote.cardId = _cardId;
-        new RoomBusiness().addVote(_id, vote, (error, result) => {
+        new RoomBusiness().upsertVote(_id, _cardId, vote, (error, result) => {
             if (error) {
                 res.send({"error": "error"});
             } else {
@@ -63,23 +62,5 @@ class CardController {
             }
         });
     }
-
-    updateVote(req: express.Request, res: express.Response): void {
-        const _id: string = req.params._id;
-        const _cardId: string = req.params._cardId;
-        const _voteId: string = req.params._voteId;
-        const vote: IVoteModel = <IVoteModel> req.body;
-        vote.cardId = _cardId;
-        new RoomBusiness().updateVote(_id, _voteId, vote, (error, result) => {
-            if (error) {
-                res.send({"error": "error"});
-            } else {
-                res.send(result);
-                SocketController.getInstance().addVote(_id, result);
-            }
-        });
-    }
-
-
 }
 export = CardController;
