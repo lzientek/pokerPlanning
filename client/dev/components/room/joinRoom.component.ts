@@ -37,13 +37,17 @@ export class JoinRoomComponent extends OnInit {
     }
 
     joinRoom() {
-        this.userService.addUser(this.room._id, this.nUser)
-            .then((result) => {
-                localStorage.setItem('userId', result._id);
-                this.router.navigateByUrl(`/room/${this.room._id}`);
-            })
-            .catch((err) => {
-                alert(`Une erreur est survenue ${err.message}`);
-            });
+        if(this.nUser.name != null && this.nUser.name != " "){
+            this.userService.addUser(this.room._id, this.nUser)
+                .then((result) => {
+                    localStorage.setItem('userId', result._id);
+                    this.router.navigateByUrl(`/room/${this.room._id}`);
+                })
+                .catch((err) => {
+                    alert(`Une erreur est survenue ${err.message}`);
+                });
+        }   else{
+            //todo: error
+        } 
     }
 }
