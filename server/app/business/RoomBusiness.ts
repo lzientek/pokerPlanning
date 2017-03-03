@@ -104,6 +104,11 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         });
     }
 
+    updateCardEvaluation (_id: string, _roomId: string, _cardId: string, evaluation: number
+        , callback: (error: any, result: IRoomModel) => void) {
+        this._roomRepository.updateEvaluation(_roomId, _cardId, evaluation, callback);
+    }
+
     upsertVote(_roomId: string, _cardId: string, item: IVoteModel,
      callback: (error: any, result: VoteResult) => void) {
         this._roomRepository.upsertVote(_roomId, _cardId, item, (error, val) => {
