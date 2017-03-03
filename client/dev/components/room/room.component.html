@@ -10,7 +10,7 @@
     </my-modal>
     <div class="col-md-12">
         <div class="col-md-8 votes">
-            <h3>Actual card: {{getCardById(vote.cardId).title}}</h3>
+            <h3>Actual user story: {{getCardById(vote.cardId).title}}</h3>
             <div class="votes-content row">
                 <div *ngIf="!vote.actualVote">
                     <div *ngFor="let val of cardsValues" class="col-md-3 col-xs-3 votes-btn">
@@ -23,13 +23,13 @@
                 </div>
             </div>
             <div class="row votes-ncard">
-                <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new card</button>
+                <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new user story</button>
                
-                <my-modal #newCardModal [title]="'Estimate new card'" [saveText]="'Create a new card'" (onSaved)="createCard()">
+                <my-modal #newCardModal [title]="'Estimate new user story'" [saveText]="'Add a user story'" (onSaved)="createCard()">
                     <div>
-                        <h3>Create a new card</h3>
+                        <h3>Add a new user story</h3>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="card title" [(ngModel)]="cardTitle" />
+                            <input class="form-control" type="text" placeholder="user story title" [(ngModel)]="cardTitle" />
                         </div>
                     </div>
                 </my-modal>

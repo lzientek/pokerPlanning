@@ -72,7 +72,6 @@ export class RoomComponent implements OnInit {
         this.newCard(card);
     }
 
-
     getCardById(id: string): Card {
         const filterResult = this.room.cards.filter(card => card._id === id);
         if (filterResult && filterResult.length > 0) {
@@ -90,25 +89,13 @@ export class RoomComponent implements OnInit {
 
     selectVoteValue(value: string) {
         console.log(this.vote);
-        if (this.vote.actualVoteId) {
-            this.cardService.updateVote(this.room._id, this.vote.cardId, this.vote.actualVoteId, value)
-            .then(result => {
-                this.vote.actualVote = value;
-                this.vote.peopleWhoVoted = result.userVoted;
-                this.vote.userIdWaiting = result.userIdWaiting;
-                this.vote.actualVoteId = result.id;
-                this.updateUserVoteState();
-            }).catch(err => console.error('vote error:', err));
-        } else {
-            this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
-            .then(result => {
-                this.vote.actualVote = value;
-                this.vote.peopleWhoVoted = result.userVoted;
-                this.vote.userIdWaiting = result.userIdWaiting;
-                this.vote.actualVoteId = result.id;
-                this.updateUserVoteState();
-            }).catch(err => console.error('vote error:', err));
-        }
+        this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
+        .then(result => {
+            this.vote.actualVote = value;
+            this.vote.peopleWhoVoted = result.userVoted;
+            this.vote.userIdWaiting = result.userIdWaiting;
+            this.updateUserVoteState();
+        }).catch(err => console.error('vote error:', err));
     }
 
     openCardModalModal() {

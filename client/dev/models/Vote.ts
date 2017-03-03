@@ -5,7 +5,6 @@
 export default class Vote {
     cardId: string;
     actualVote: string;
-    actualVoteId: string;
     waitingForOther: boolean;
     userIdWaiting: string[];
     peopleWhoVoted: {id: string, voteValue: number}[];
