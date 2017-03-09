@@ -5,7 +5,7 @@
 import express = require("express");
 import RoomController = require("./../../controllers/RoomController");
 import UserController = require("./../../controllers/UserController");
-import CardController = require("./../../controllers/CardController");
+import {CardController} from "./../../controllers/CardController";
 
 const router = express.Router();
 class RoomRoutes {

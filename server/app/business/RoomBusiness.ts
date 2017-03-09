@@ -104,7 +104,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         });
     }
 
-    updateCardEvaluation (_id: string, _roomId: string, _cardId: string, evaluation: number
+    updateCardEvaluation (_roomId: string, _cardId: string, evaluation: number
         , callback: (error: any, result: IRoomModel) => void) {
         this._roomRepository.updateEvaluation(_roomId, _cardId, evaluation, callback);
     }

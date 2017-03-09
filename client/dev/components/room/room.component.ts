@@ -158,10 +158,10 @@ export class RoomComponent implements OnInit {
         for (let i = 0; i < this.vote.peopleWhoVoted.length; i++) {
             if (!votes[this.vote.peopleWhoVoted[i].voteValue.toString()]) {
                 votes[this.vote.peopleWhoVoted[i].voteValue.toString()] = 1;
+                count++;
             } else {
                 votes[this.vote.peopleWhoVoted[i].voteValue.toString()] += 1;
             }
-            count++;
         }
 
         if (count === 1) {
