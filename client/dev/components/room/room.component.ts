@@ -57,7 +57,7 @@ export class RoomComponent implements OnInit {
                     if (room.cards && room.cards.length > 0) {
                         this.vote.cardId = room.cards[room.cards.length - 1]._id;
                     }
-                    this.room = room;
+                    this.room = room; 
                 });
         });
     }
