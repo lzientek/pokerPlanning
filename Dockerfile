@@ -1,4 +1,4 @@
-FROM node:argon
+FROM node:7.5
 MAINTAINER lzientek <lucas@zientek.fr>
 
 ENV PORT 80

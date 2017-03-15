@@ -5,7 +5,7 @@
 declare var io: any;
 
 import { ActivatedRoute, Params } from '@angular/router';
-import { Component, OnInit, ViewChild, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { Card } from "../../models/Card";
 import { CardService } from "../../services/card.service";
@@ -27,7 +27,10 @@ export class RoomComponent implements OnInit {
     userId: string;
     vote: Vote = new Vote();
     cardTitle: string;
+    shareUrl: string = location.href.split('#')[0];
     @ViewChild("newCardModal") newCardModal: ModalComponent;
+    @ViewChild("consensusModal") consensusModal: ModalComponent;
+    @ViewChild("shareModal") shareModal: ModalComponent;
 
     cardsValues: string[] =
         ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
@@ -69,7 +72,6 @@ export class RoomComponent implements OnInit {
         this.newCard(card);
     }
 
-
     getCardById(id: string): Card {
         const filterResult = this.room.cards.filter(card => card._id === id);
         if (filterResult && filterResult.length > 0) {
@@ -87,25 +89,13 @@ export class RoomComponent implements OnInit {
 
     selectVoteValue(value: string) {
         console.log(this.vote);
-        if (this.vote.actualVoteId) {
-            this.cardService.updateVote(this.room._id, this.vote.cardId, this.vote.actualVoteId, value)
-            .then(result => {
-                this.vote.actualVote = value;
-                this.vote.peopleWhoVoted = result.userVoted;
-                this.vote.userIdWaiting = result.userIdWaiting;
-                this.vote.actualVoteId = result.id;
-                this.updateUserVoteState();
-            }).catch(err => console.error('vote error:', err));
-        } else {
-            this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
-            .then(result => {
-                this.vote.actualVote = value;
-                this.vote.peopleWhoVoted = result.userVoted;
-                this.vote.userIdWaiting = result.userIdWaiting;
-                this.vote.actualVoteId = result.id;
-                this.updateUserVoteState();
-            }).catch(err => console.error('vote error:', err));
-        }
+        this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
+        .then(result => {
+            this.vote.actualVote = value;
+            this.vote.peopleWhoVoted = result.userVoted;
+            this.vote.userIdWaiting = result.userIdWaiting;
+            this.updateUserVoteState();
+        }).catch(err => console.error('vote error:', err));
     }
 
     openCardModalModal() {
@@ -168,15 +158,16 @@ export class RoomComponent implements OnInit {
         for (let i = 0; i < this.vote.peopleWhoVoted.length; i++) {
             if (!votes[this.vote.peopleWhoVoted[i].voteValue.toString()]) {
                 votes[this.vote.peopleWhoVoted[i].voteValue.toString()] = 1;
+                count++;
             } else {
                 votes[this.vote.peopleWhoVoted[i].voteValue.toString()] += 1;
             }
-            count++;
         }
 
         if (count === 1) {
             this.vote.isConsensus = true;
             this.room.cards[this.room.cards.length - 1].evaluation = parseInt(this.vote.actualVote, 10);
+            this.consensusModal.showModal();
         } else {
             console.log("votes", votes);
         }

@@ -6,7 +6,6 @@ import DataAccess = require('../DataAccess');
 import IRoomModel = require("./../../model/RoomModel");
 import UserSchema = require('./UserSchema');
 import CardSchema = require('./CardSchema');
-import VoteSchema = require('./VoteSchema');
 
 let mongoose = DataAccess.mongooseInstance;
 let mongooseConnection = DataAccess.mongooseConnection;
@@ -30,9 +29,6 @@ class RoomSchema {
             cards: {
                 type: [CardSchema.schema],
             },
-            votes: {
-                type: [VoteSchema.schema],
-            }
         });
 
         return schema;

@@ -9,6 +9,7 @@ import { routing }       from './app.routing';
 import { DashboardComponent }   from './components/dashboard/dashboard.component';
 import { RoomComponent }   from './components/room/room.component';
 import { JoinRoomComponent }   from './components/room/joinRoom.component';
+import { HistoryCard }   from './components/room/historyCard.component';
 import { ModalComponent }   from './components/global/modal.component';
 
 import { RoomService }  from './services/room.service';
@@ -29,6 +30,7 @@ import { CardService }  from './services/card.service';
     RoomComponent,
     //global
     ModalComponent,
+    HistoryCard,
   ],
   providers: [
     RoomService,

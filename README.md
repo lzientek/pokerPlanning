@@ -37,7 +37,7 @@ docker rmi pokerplanning mongo:3.4
 ```
 ## Prerequisites
 
-1. Latest version of Node to be installed. (6.9.*^)
+1. Latest version of Node to be installed. (7.5.*^)
 2. Install MongoDB and make sure it is running on default port 27017 (if not then please configure constants.ts and change the connection for mongoDB). (3.2.*^)
 
 ## Steps to Run

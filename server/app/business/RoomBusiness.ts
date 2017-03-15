@@ -104,27 +104,19 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
         });
     }
 
-    addVote(_id: string, item: IVoteModel, callback: (error: any, result: VoteResult) => void) {
-        this._roomRepository.addVote(_id, item, (error, val) => {
-            callback(error, this.roomToVoteResult(error, val, item));
+    updateCardEvaluation (_roomId: string, _cardId: string, evaluation: number
+        , callback: (error: any, result: IRoomModel) => void) {
+        this._roomRepository.updateEvaluation(_roomId, _cardId, evaluation, callback);
+    }
+
+    upsertVote(_roomId: string, _cardId: string, item: IVoteModel,
+     callback: (error: any, result: VoteResult) => void) {
+        this._roomRepository.upsertVote(_roomId, _cardId, item, (error, val) => {
+            callback(error, this.roomToVoteResult(error, val, _cardId, item));
         });
     }
 
-    updateVote(_id: string, _voteId: string
-        , item: IVoteModel, callback: (error: any, result: VoteResult) => void) {
-        this._roomRepository.findById(_id, (error, val) => {
-            if (error) { return callback(error, null); }
-            for (let i = 0; i < val.votes.length; i++) {
-                if (val.votes[i]._id.toString() === _voteId) {
-                    val.votes[i].voteValue = item.voteValue;
-                }
-            }
-            this._roomRepository.update(val._id, val
-                , error => callback(error, this.roomToVoteResult(error, val, item, _voteId)));
-        });
-    }
-
-    private roomToVoteResult (error, val: IRoomModel, item: IVoteModel, id: string = null) {
+    private roomToVoteResult (error, val: IRoomModel, cardId: string, item: IVoteModel) {
         let res = new VoteResult(null, null, null);
         if (!error && val) {
             const users: string[] = [];
@@ -135,22 +127,20 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                     users.push(val.users[j]._id.toHexString());
                 }
             }
-            const actualVote = val.votes.filter(
-                vote => { return vote.cardId === item.cardId && users.indexOf(vote.userId) >= 0; });
+            const actualVotes = val.cards.filter(card => card._id.toString() === cardId)[0].votes;
 
-            for (let i = actualVote.length - 1; i >= 0 ; i--) {
-                usersWhoVoted.push({ id: actualVote[i].userId, voteValue: actualVote[i].voteValue });
-                const index = users.indexOf(actualVote[i].userId);
+            for (let i = actualVotes.length - 1; i >= 0 ; i--) {
+                const index = users.indexOf(actualVotes[i].userId);
                 if (index >= 0) {
                     users.splice(index, 1);
+                    usersWhoVoted.push({ id: actualVotes[i].userId, voteValue: actualVotes[i].voteValue });
                 }
             }
-            res = new VoteResult(users, usersWhoVoted, id || val.votes[val.votes.length - 1]._id);
+            res = new VoteResult(users, usersWhoVoted, item._id);
         }
         return res;
     }
 }
-
 
 Object.seal(RoomBusiness);
 export = RoomBusiness;

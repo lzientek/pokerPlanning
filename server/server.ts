@@ -7,8 +7,8 @@ import * as path from 'path';
 import BaseRoutes from "./config/routes/Routes";
 import SocketController from './controllers/SocketController';
 
-const port: number = process.env.PORT || 3000;
-const env: string = process.env.NODE_ENV || 'developement';
+const port: number = <number> (process.env['PORT'] || 3000);
+const env: string = process.env['NODE_ENV'] || 'developement';
 
 const app = express();
 
@@ -62,5 +62,8 @@ export { app, server };
 server.listen(app.get('port'), function(){
     let host = server.address().address;
     let port = server.address().port;
-    console.log('This express angular app is listening on port:' + port, 'Environement:' + env, 'files:' + _clientFiles);
+    console.log('This express angular app is listening on port:' + port
+        , 'Environement:' + env
+        , 'host:' + host
+        , 'files:' + _clientFiles);
 });

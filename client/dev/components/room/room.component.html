@@ -1,8 +1,16 @@
 <div class="row">
-    <h2>{{room.name}}</h2>
+    <h2>{{room.name}}  <button class="btn btn-xs btn-warning" (click)="shareModal.showModal()" >Partager la room</button></h2>
+    <my-modal #shareModal [options]="{display: {header:true,footer:false}}" title="Partager">
+        <h3>Lien</h3>
+        <p>Partagé ce lien:</p>
+        <input type="text" class="form-control" value="{{shareUrl}}#/join/{{room._id}}" />
+        <h3>Par identifiant</h3>
+        <input type="text" class="form-control" value="{{room._id}}" />
+        
+    </my-modal>
     <div class="col-md-12">
         <div class="col-md-8 votes">
-            <h3>Actual card: {{getCardById(vote.cardId).title}}</h3>
+            <h3>Actual user story: {{getCardById(vote.cardId).title}}</h3>
             <div class="votes-content row">
                 <div *ngIf="!vote.actualVote">
                     <div *ngFor="let val of cardsValues" class="col-md-3 col-xs-3 votes-btn">
@@ -11,44 +19,44 @@
                 </div>
                 <div *ngIf="vote.actualVote">
                     <h1>{{vote.actualVote}}</h1>
-                    <p><button (click)="clearLocalVote()">Change vote</button></p>
+                    <p><button class="btn btn-warning" (click)="clearLocalVote()">Change vote</button></p>
                 </div>
             </div>
             <div class="row votes-ncard">
-                <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new card</button>
+                <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new user story</button>
                
-                <my-modal #newCardModal [title]="'Estimate new card'" [saveText]="'Create a new card'" (onSaved)="createCard()">
+                <my-modal #newCardModal [title]="'Estimate new user story'" [saveText]="'Add a user story'" (onSaved)="createCard()">
                     <div>
-                        <h3>Create a new card</h3>
+                        <h3>Add a new user story</h3>
                         <div class="form-group">
-                            <input class="form-control" type="text" placeholder="card title" [(ngModel)]="cardTitle" />
+                            <input class="form-control" type="text" placeholder="user story title" [(ngModel)]="cardTitle" />
                         </div>
                     </div>
                 </my-modal>
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 users">
             <h3>Users</h3>
-            <ul>
-                <li *ngFor="let user of room.users" class="col-md-3">
+            <ul class="users-list">
+                <li *ngFor="let user of room.users" class="users-list-item" >
                     {{user.name}}
-                    <span *ngIf="user.hasVoted"> Ok </span>
+                    <span class="text-success" *ngIf="user.hasVoted"> Ok </span>
                     <span *ngIf="user.isVisitor"> Visitor </span>
-                    <span *ngIf="!user.hasVoted && !user.isVisitor"> Waiting </span>
-                    <span class="text-error" *ngIf="!user.isActive"> (Disconnected) </span>
+                    <span class="text-info" *ngIf="!user.hasVoted && !user.isVisitor"> Waiting </span>
+                    <span class="text-danger" *ngIf="!user.isActive"> (Disconnected) </span>
                 </li>
             </ul>
         </div>
     </div>
     <div class="col-md-12">
         <h2>History <button class="btn btn-xs btn-warning">Export</button></h2>
-        <div *ngFor="let card of room.cards" class="col-md-3">
-            <h4>{{card.title}}</h4>
-            <p>evaluation : {{card.evaluation}}</p>
-        </div>
+        <my-history-card *ngFor="let card of room.cards" [card]="card" >
+        </my-history-card>
     </div>
-    <!--
-    <div *ngIf="vote.isConsensus" class="col-md-12">
-        Consensus!
-    </div>-->
+    <my-modal #consensusModal [title]="Consensus" [options]="{display: {header:false,footer:false}}">
+        <div class="padding-bottom-40">
+            <h2>Consensus!</h2>
+            <p>Bravo vous avez réussi! Carte évaluté à <strong>{{vote.actualVote}}</strong></p>
+        </div>
+    </my-modal>
 </div>

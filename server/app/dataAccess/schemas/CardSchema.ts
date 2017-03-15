@@ -3,6 +3,7 @@
  */
 
 import DataAccess = require('../DataAccess');
+import VoteSchema = require('./VoteSchema');
 
 const mongoose = DataAccess.mongooseInstance;
 
@@ -27,6 +28,9 @@ class CardSchema {
                 type: Number,
                 required: false,
             },
+            votes: {
+                type: [VoteSchema.schema],
+            }
         });
 
         return schema;
