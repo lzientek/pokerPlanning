@@ -23,12 +23,19 @@ class RoomRepository  extends RepositoryBase<IRoomModel> {
     upsertVote(_id: string, _cardId: string, vote: IVote
         , callback: (error: any, result: IRoomModel) => void) {
         this._model.findOneAndUpdate({"_id": _id, "cards._id": _cardId},
-            {$pull: {"cards.$.votes": {"$elemMatch": {"userId": vote.userId}}}},
+            {$pull: {"cards.$.votes": {"userId": vote.userId}}},
             { upsert: true, new : true}, () => {
                 this._model.findOneAndUpdate({"_id": _id, "cards._id": _cardId},
                     {$push: {"cards.$.votes": vote}},
                     { upsert: true, new : true}, callback);
             });
+    }
+
+    updateCard(_id: string, _cardId: string, value: ICardModel,
+        callback: (error: any, result: IRoomModel) => void) {
+        this._model.findOneAndUpdate({"_id": _id, "cards._id": _cardId},
+            {$set: {"cards.$.evaluation": value.evaluation, "cards.$.title": value.title}},
+            { upsert: true, new : true}, callback);
     }
 
     updateEvaluation(_id: string, _cardId: string, evaluation: number
