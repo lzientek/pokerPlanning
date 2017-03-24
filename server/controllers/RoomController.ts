@@ -12,7 +12,6 @@ class RoomController implements IBaseController <RoomBusiness> {
     create(req: express.Request, res: express.Response): void {
         try {
             const room: IRoomModel = <IRoomModel> req.body;
-            console.log(req.body);
             const roomBusiness = new RoomBusiness();
             roomBusiness.create(room, (error, result) => {
                 if (error) {

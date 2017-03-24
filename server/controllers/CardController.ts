@@ -60,12 +60,13 @@ export class CardController {
             } else {
                 const votes: {[id: string]: number} = {};
                 let count = 0;
+                console.log('res', result);
                 for (let i = 0; i < result.userVoted.length; i++) {
-                    if (!votes[result.userVoted[i].voteValue.toString()]) {
-                        votes[result.userVoted[i].voteValue.toString()] = 1;
+                    if (!votes[result.userVoted[i].voteValue]) {
+                        votes[result.userVoted[i].voteValue] = 1;
                         count++;
                     } else {
-                        votes[result[i].voteValue.toString()] += 1;
+                        votes[result.userVoted[i].voteValue] += 1;
                     }
                 }
                 if (count === 1) { //if concenssus

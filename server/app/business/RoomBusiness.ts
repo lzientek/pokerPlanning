@@ -90,18 +90,8 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     }
 
     updateCard (_id: string, item: ICardModel, callback: (error: any, result: ICardModel) => void) {
-        this._roomRepository.findById(_id, (err, res) => {
-            if (err) {
-                callback(err, null);
-            } else {
-                for (let index = res.users.length - 1; index > 0; index--) {
-                    if (res.cards[index]._id.toString() === item._id) {
-                        res.cards[index] = item;
-                    }
-                }
-                this._roomRepository.update(res._id, res, error => callback(error, item));
-            }
-        });
+        this._roomRepository.updateCard(_id, item._id, item, (err, res) =>
+            callback(err, res.cards.find(item => item.id === item.id)));
     }
 
     updateCardEvaluation (_roomId: string, _cardId: string, evaluation: number
@@ -112,12 +102,12 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
     upsertVote(_roomId: string, _cardId: string, item: IVoteModel,
      callback: (error: any, result: VoteResult) => void) {
         this._roomRepository.upsertVote(_roomId, _cardId, item, (error, val) => {
-            callback(error, this.roomToVoteResult(error, val, _cardId, item));
+            callback(error, this.roomToVoteResult(error, val, _cardId));
         });
     }
 
-    private roomToVoteResult (error, val: IRoomModel, cardId: string, item: IVoteModel) {
-        let res = new VoteResult(null, null, null);
+    private roomToVoteResult (error, val: IRoomModel, cardId: string) {
+        let res = new VoteResult(null, null);
         if (!error && val) {
             const users: string[] = [];
             const usersWhoVoted: { id: string, voteValue: string }[] = [];
@@ -136,7 +126,7 @@ class RoomBusiness implements BaseBusiness<IRoomModel> {
                     usersWhoVoted.push({ id: actualVotes[i].userId, voteValue: actualVotes[i].voteValue });
                 }
             }
-            res = new VoteResult(users, usersWhoVoted, item._id);
+            res = new VoteResult(users, usersWhoVoted);
         }
         return res;
     }

@@ -88,7 +88,6 @@ export class RoomComponent implements OnInit {
     }
 
     selectVoteValue(value: string) {
-        console.log(this.vote);
         this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
         .then(result => {
             this.vote.actualVote = value;
