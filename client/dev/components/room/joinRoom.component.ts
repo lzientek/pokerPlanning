@@ -2,14 +2,14 @@
  * Created by Lzientek on 01-10-2016
  */
 
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { RoomService } from "../../services/room.service";
 import { UserService } from "../../services/user.service";
 import Room from '../../models/Room';
-import { User } from '../../models/User';
+import User from '../../models/User';
 
 @Component({
     selector: 'my-join-room',
@@ -25,7 +25,7 @@ export class JoinRoomComponent extends OnInit {
         private route: ActivatedRoute,
         private roomService: RoomService,
         private userService: UserService) {
-            super();
+        super();
     }
 
     ngOnInit() {
@@ -37,7 +37,7 @@ export class JoinRoomComponent extends OnInit {
     }
 
     joinRoom() {
-        if(this.nUser.name != null && this.nUser.name != " "){
+        if (this.nUser.name != null && this.nUser.name !== " ") {
             this.userService.addUser(this.room._id, this.nUser)
                 .then((result) => {
                     localStorage.setItem('userId', result._id);
@@ -46,8 +46,6 @@ export class JoinRoomComponent extends OnInit {
                 .catch((err) => {
                     alert(`Une erreur est survenue ${err.message}`);
                 });
-        }   else{
-            //todo: error
-        } 
+        }
     }
 }

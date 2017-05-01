@@ -12,5 +12,6 @@ export default class Vote {
     constructor(cardId: string = null) {
         this.cardId = cardId;
         this.isConsensus = false;
+        this.waitingForOther = true;
     }
 }

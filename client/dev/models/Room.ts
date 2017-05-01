@@ -2,7 +2,7 @@
  * Created by Lzientek on 01-10-2016.
  */
 
-import { User } from "./User";
+import User from "./User";
 import { Card } from "./Card";
 
 export default class Room {
