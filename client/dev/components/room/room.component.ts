@@ -11,7 +11,7 @@ import { Card } from "../../models/Card";
 import { CardService } from "../../services/card.service";
 import Room from "../../models/Room";
 import { RoomService } from "../../services/room.service";
-import { User } from"../../models/User";
+import User from "../../models/User";
 import Vote from '../../models/Vote';
 import { ModalComponent } from '../global/modal.component';
 
@@ -33,7 +33,7 @@ export class RoomComponent implements OnInit {
     @ViewChild("shareModal") shareModal: ModalComponent;
 
     cardsValues: string[] =
-        ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
+    ['0.5', '1', '2', '3', '5', '8', '13', '21', '34', '55', '89', '144', '?', 'coffee'];
 
     constructor(
         private route: ActivatedRoute,
@@ -60,6 +60,10 @@ export class RoomComponent implements OnInit {
                     this.room = room;
                 });
         });
+    }
+
+    otherVotes(): { id: string, voteValue: number }[] {
+        return this.vote ? this.vote.peopleWhoVoted.filter(u => u.id !== this.userId) : null;
     }
 
     upsertCard(card: Card) {
@@ -89,12 +93,12 @@ export class RoomComponent implements OnInit {
 
     selectVoteValue(value: string) {
         this.cardService.addVote(this.room._id, this.vote.cardId, this.userId, value)
-        .then(result => {
-            this.vote.actualVote = value;
-            this.vote.peopleWhoVoted = result.userVoted;
-            this.vote.userIdWaiting = result.userIdWaiting;
-            this.updateUserVoteState();
-        }).catch(err => console.error('vote error:', err));
+            .then(result => {
+                this.vote.actualVote = value;
+                this.vote.peopleWhoVoted = result.userVoted;
+                this.vote.userIdWaiting = result.userIdWaiting;
+                this.updateUserVoteState();
+            }).catch(err => console.error('vote error:', err));
     }
 
     openCardModalModal() {
@@ -112,7 +116,7 @@ export class RoomComponent implements OnInit {
 
     updateUserVoteState() {
         for (let j = 0; j < this.room.users.length; j++) {
-            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : true ;
+            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : true;
         }
         for (let i = 0; i < this.vote.userIdWaiting.length; i++) {
             this.getUserById(this.vote.userIdWaiting[i]).hasVoted = false;
@@ -129,7 +133,7 @@ export class RoomComponent implements OnInit {
         this.room.cards.push(card);
         this.vote = new Vote(card._id);
         for (let j = 0; j < this.room.users.length; j++) {
-            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : false ;
+            this.room.users[j].hasVoted = this.room.users[j].isSpectator ? null : false;
         }
     }
 
@@ -138,21 +142,22 @@ export class RoomComponent implements OnInit {
     }
 
     private removeUser(userId: string) {
-        const indexToRemove  = this.room.users.findIndex(u => u._id === userId);
+        const indexToRemove = this.room.users.findIndex(u => u._id === userId);
         if (indexToRemove >= 0) {
             this.room.users[indexToRemove].isActive = false;
         }
     }
 
     private activateUser(userId: string) {
-        const indexToRemove  = this.room.users.findIndex(u => u._id === userId);
+        const indexToRemove = this.room.users.findIndex(u => u._id === userId);
         if (indexToRemove >= 0) {
             this.room.users[indexToRemove].isActive = true;
         }
     }
 
     private allUserHaveVote() {
-        const votes: {[id: string]: number} = {};
+        this.vote.waitingForOther = false;
+        const votes: { [id: string]: number } = {};
         let count = 0;
         for (let i = 0; i < this.vote.peopleWhoVoted.length; i++) {
             if (!votes[this.vote.peopleWhoVoted[i].voteValue.toString()]) {
@@ -164,6 +169,7 @@ export class RoomComponent implements OnInit {
         }
 
         if (count === 1) {
+            this.vote.waitingForOther = true;
             this.vote.isConsensus = true;
             this.room.cards[this.room.cards.length - 1].evaluation = parseInt(this.vote.actualVote, 10);
             this.consensusModal.showModal();
@@ -173,7 +179,7 @@ export class RoomComponent implements OnInit {
     }
 
     private getUserById(userId: string): User {
-        for (let i = 0; i < this.room.users.length; i++ ) {
+        for (let i = 0; i < this.room.users.length; i++) {
             if (this.room.users[i]._id === userId) {
                 return this.room.users[i];
             }

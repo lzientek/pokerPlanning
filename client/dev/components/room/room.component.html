@@ -21,6 +21,9 @@
                     <h1>{{vote.actualVote}}</h1>
                     <p><button class="btn btn-warning" (click)="clearLocalVote()">Change vote</button></p>
                 </div>
+                <div *ngIf="!vote.waitingForOther">
+                    <evaluation-display [vote]="otherVotes()" [users]="room.users" ></evaluation-display>
+                </div>
             </div>
             <div class="row votes-ncard">
                 <button class="btn btn-link" (click)="openCardModalModal()">Evaluate a new user story</button>

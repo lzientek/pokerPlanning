@@ -1,0 +1,5 @@
+<h3>Autres votes:</h3>
+<ul class="list">
+    <li class="item" *ngFor="let val of vote" >{{getUserById(val.id).name}} {{val.voteValue}}</li>
+</ul>
+
